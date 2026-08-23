@@ -68,10 +68,11 @@ function AppRoutes() {
         <Route path="/register" element={<RegisterPage />} />
       </Route>
 
-      {/* Adaptive Plan Catalogue routes */}
+      {/* Adaptive Plan Catalogue & Comparison routes */}
       <Route element={<AdaptivePlanLayout />}>
         <Route path="/plans" element={<PlansPage />} />
         <Route path="/plans/:id" element={<PlanDetailsPage />} />
+        <Route path="/compare" element={<ComparePage />} />
       </Route>
 
       {/* Customer routes */}
@@ -81,7 +82,6 @@ function AppRoutes() {
           <Route path="/find-plan" element={<Navigate to="/dashboard" replace />} />
           <Route path="/recommendations" element={<Navigate to="/dashboard" replace />} />
           <Route path="/recommendations/:id" element={<RecommendationDetailPage />} />
-          <Route path="/compare" element={<ComparePage />} />
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<PreferencesPage />} />

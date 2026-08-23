@@ -1,7 +1,20 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { X, Scale, Check, Zap, Database, Phone, MessageSquare, IndianRupee } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  X,
+  Scale,
+  Check,
+  Zap,
+  Database,
+  Phone,
+  MessageSquare,
+  IndianRupee,
+  ArrowLeft,
+  Trash2,
+  Plus,
+  Sparkles,
+} from "lucide-react";
 import { planApi } from "@/services/planApi";
 import { clearCompare, toggleCompare } from "@/store/slices/planSlice";
 import EmptyState from "@/components/common/EmptyState";
@@ -13,6 +26,7 @@ import { formatCurrency, formatData, formatMinutes, formatCount } from "@/utils/
 export default function ComparePage() {
   const compareList = useSelector((s) => s.plans.compareList);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,19 +50,22 @@ export default function ComparePage() {
 
   if (!plans.length) {
     return (
-      <EmptyState
-        icon={Scale}
-        title="No plans selected for comparison"
-        description="Browse the Plan Catalogue and select up to 3 plans to compare them side-by-side."
-        actionLabel="Browse Plan Catalogue"
-        onAction={() => (window.location.href = "/plans")}
-      />
+      <div className="py-6">
+        <EmptyState
+          icon={Scale}
+          title="No plans selected for comparison"
+          description="Browse the Plan Catalogue and select up to 3 plans to compare them side-by-side."
+          actionLabel="Browse Plan Catalogue"
+          onAction={() => navigate("/plans")}
+        />
+      </div>
     );
   }
 
   // Find best values for highlight
-  const lowestPrice = Math.min(...plans.map((p) => p.price));
-  const highestData = Math.max(...plans.map((p) => p.dataLimit));
+  const validPlans = plans.filter((p) => p && typeof p.price === "number");
+  const lowestPrice = validPlans.length > 0 ? Math.min(...validPlans.map((p) => p.price)) : 0;
+  const highestData = validPlans.length > 0 ? Math.max(...validPlans.map((p) => p.dataLimit || 0)) : 0;
 
   const rows = [
     {
@@ -133,6 +150,26 @@ export default function ComparePage() {
         ),
     },
     {
+      label: "Included Benefits",
+      render: (p) => (
+        <div className="flex flex-wrap gap-1.5">
+          {p.benefits && p.benefits.length > 0 ? (
+            p.benefits.map((b, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700"
+              >
+                <Check className="h-3 w-3 text-emerald-600 shrink-0" />
+                {b}
+              </span>
+            ))
+          ) : (
+            <span className="text-slate-400">Standard benefits</span>
+          )}
+        </div>
+      ),
+    },
+    {
       label: "Category",
       render: (p) => <Badge variant="info">{p.category}</Badge>,
     },
@@ -154,7 +191,7 @@ export default function ComparePage() {
             Plan Comparison
           </h1>
           <p className="mt-1 text-xs sm:text-sm text-slate-500 font-medium">
-            Comparing {plans.length} selected tariff plans side-by-side.
+            Comparing {plans.length} of 3 selected tariff plans side-by-side.
           </p>
         </div>
 
@@ -167,14 +204,16 @@ export default function ComparePage() {
           >
             Clear All
           </Button>
-          <Button
-            variant="secondary"
-            size="sm"
-            icon={Plus}
-            onClick={() => navigate("/plans")}
-          >
-            Add More Plans
-          </Button>
+          {plans.length < 3 && (
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={Plus}
+              onClick={() => navigate("/plans")}
+            >
+              Add More Plans
+            </Button>
+          )}
         </div>
       </div>
 
@@ -196,7 +235,7 @@ export default function ComparePage() {
                     </div>
                     <button
                       onClick={() => dispatch(toggleCompare(p._id))}
-                      className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-rose-600 transition"
+                      className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-rose-600 transition cursor-pointer"
                       title="Remove from comparison"
                     >
                       <X className="h-4 w-4" />
@@ -213,7 +252,7 @@ export default function ComparePage() {
                   {row.label}
                 </td>
                 {plans.map((p) => (
-                  <td key={p._id} className="p-4 sm:p-5 text-slate-700">
+                  <td key={p._id} className="p-4 sm:p-5 text-slate-700 align-top">
                     {row.render(p)}
                   </td>
                 ))}
