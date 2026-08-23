@@ -61,8 +61,8 @@ export const adminApi = {
       const scoreDistribution = Object.entries(buckets).map(([range, count]) => ({ range, count }));
 
       // feedback stats
-      const up = feedback.filter((f) => f.rating === "up").length;
-      const down = feedback.filter((f) => f.rating === "down").length;
+      const up = feedback.filter((f) => f.rating === "up" || f.rating >= 4).length;
+      const down = feedback.filter((f) => f.rating === "down" || (typeof f.rating === "number" && f.rating < 4)).length;
       const feedbackStats = [
         { name: "Helpful", value: up },
         { name: "Not helpful", value: down },

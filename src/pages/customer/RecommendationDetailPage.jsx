@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { recommendationApi } from "@/services/recommendationApi";
 import RecommendationCard from "@/components/dashboard/RecommendationCard";
 import SavingsSummary from "@/components/dashboard/SavingsSummary";
+import RecommendationFeedback from "@/components/dashboard/RecommendationFeedback";
 import { PageLoader } from "@/components/common/Loader";
 import ErrorState from "@/components/common/ErrorState";
 import { formatDate } from "@/utils/format";
@@ -61,7 +62,10 @@ export default function RecommendationDetailPage() {
         ))}
       </div>
 
-      <SavingsSummary savings={120} overage="₹0 - ₹20" benchmarkCount="1000+" />
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <SavingsSummary savings={120} overage="₹0 - ₹20" benchmarkCount="1000+" />
+        <RecommendationFeedback recommendationId={id} />
+      </div>
     </div>
   );
 }

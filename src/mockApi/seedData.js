@@ -247,6 +247,34 @@ export function seedIfNeeded() {
     saveAll(collections.users, users);
     saveAll(collections.customerProfiles, profiles);
   }
+
+  // Ensure initial customer feedback is seeded for admin stats and customer reviews
+  const existingFeedback = getAll(collections.feedback);
+  if (existingFeedback.length === 0) {
+    const customers = users.filter((u) => u.role === "customer");
+    if (customers.length > 0) {
+      const sampleReviews = [
+        { rating: "up", comment: "The Stream 60 plan matched my high 100 GB usage and saved me ₹180 per month!" },
+        { rating: "up", comment: "Unlimited calling and high 5G speed worked great without extra charges." },
+        { rating: "up", comment: "The 3-Month bundle discount is great value for money." },
+        { rating: "down", comment: "Would like more SMS benefits bundled with standard plans." },
+        { rating: "up", comment: "Accurate analysis based on my past data consumption habits." },
+        { rating: "up", comment: "Saved over ₹600 by upgrading to the recommended annual bundle." },
+      ];
+
+      const initialFeedback = sampleReviews.map((item, idx) => ({
+        _id: genId("fb"),
+        customerId: customers[idx % customers.length]._id,
+        recommendationId: `rec_seed_${idx + 1}`,
+        rating: item.rating,
+        comment: item.comment,
+        createdAt: new Date(Date.now() - (idx + 1) * 86400000 * 3).toISOString(),
+        updatedAt: new Date(Date.now() - (idx + 1) * 86400000 * 3).toISOString(),
+      }));
+
+      saveAll(collections.feedback, initialFeedback);
+    }
+  }
 }
 
 export const DEMO_CREDENTIALS = {

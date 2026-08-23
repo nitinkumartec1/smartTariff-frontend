@@ -19,6 +19,7 @@ import RecommendationCard from "@/components/dashboard/RecommendationCard";
 import SavingsSummary from "@/components/dashboard/SavingsSummary";
 import RecommendationReasons from "@/components/dashboard/RecommendationReasons";
 import UsageVsPlan from "@/components/dashboard/UsageVsPlan";
+import RecommendationFeedback from "@/components/dashboard/RecommendationFeedback";
 import { CardSkeleton } from "@/components/common/Loader";
 
 // Fallback plans matching reference UI if user hasn't generated recommendations yet
@@ -274,6 +275,9 @@ export default function DashboardPage() {
             }}
             topPlan={top1Plan}
           />
+
+          {/* Rate this Recommendation Feedback Widget */}
+          <RecommendationFeedback recommendationId={latest?._id || "latest"} />
         </div>
       </div>
     </div>
