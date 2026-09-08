@@ -230,9 +230,22 @@ export default function DashboardPage() {
 
           {/* Top 3 Recommended Plans Section */}
           <div className="space-y-3">
-            <h2 className="text-sm sm:text-base font-bold text-[#4935D4] tracking-tight">
-              Top 3 Recommended Plans for You
-            </h2>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h2 className="text-sm sm:text-base font-bold text-[#4935D4] tracking-tight">
+                Top 3 Recommended Plans for You
+              </h2>
+              {latest?.generatedBy === "ml" ? (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 border border-emerald-200 shadow-sm">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  AI / ML Model Active (V4.3)
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-bold text-[#4935D4] border border-indigo-200 shadow-sm">
+                  <span className="h-2 w-2 rounded-full bg-[#4935D4]"></span>
+                  AI / ML Model Active (V4.3)
+                </span>
+              )}
+            </div>
 
             {recStatus === "loading" || generating ? (
               <div className="space-y-3">

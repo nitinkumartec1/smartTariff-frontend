@@ -29,7 +29,7 @@ const RANK_CONFIGS = {
 
 export default function RecommendationCard({ item, rank = 1 }) {
   const plan = item?.plan || item;
-  const score = item?.score || (rank === 1 ? 92 : rank === 2 ? 87 : 79);
+  const score = typeof item?.score === "number" ? Math.round(item.score) : (rank === 1 ? 92 : rank === 2 ? 87 : 79);
   const reasons = item?.reasons || [];
   const config = RANK_CONFIGS[rank] || RANK_CONFIGS[1];
 

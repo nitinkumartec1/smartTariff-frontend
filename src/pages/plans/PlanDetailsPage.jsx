@@ -9,7 +9,6 @@ import {
   Zap,
   Calendar,
   Scale,
-  Sparkles,
   ArrowLeft,
   CheckCircle2,
   ShieldCheck,
@@ -21,7 +20,6 @@ import Badge from "@/components/common/Badge";
 import { PageLoader } from "@/components/common/Loader";
 import ErrorState from "@/components/common/ErrorState";
 import { formatCurrency, formatData, formatMinutes, formatCount } from "@/utils/format";
-import { useAuth } from "@/hooks/useAuth";
 
 export default function PlanDetailsPage() {
   const { id } = useParams();
@@ -30,7 +28,6 @@ export default function PlanDetailsPage() {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, isCustomer } = useAuth();
 
   useEffect(() => {
     setStatus("loading");
@@ -54,11 +51,6 @@ export default function PlanDetailsPage() {
       </div>
     );
   if (!plan) return null;
-
-  const handleGetRecommendation = () => {
-    if (!isAuthenticated) return navigate("/login");
-    navigate("/dashboard");
-  };
 
   return (
     <div className="mx-auto max-w-5xl space-y-6">
@@ -173,11 +165,7 @@ export default function PlanDetailsPage() {
         {/* Right Action Sidebar */}
         <div className="space-y-4">
           <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] space-y-3">
-            <Button className="w-full" icon={Sparkles} onClick={handleGetRecommendation}>
-              Score Against My Usage
-            </Button>
             <Button
-              variant="secondary"
               className="w-full"
               icon={Scale}
               onClick={() => {

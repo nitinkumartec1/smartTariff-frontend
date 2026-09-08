@@ -22,7 +22,7 @@ const FEATURES = [
 ];
 
 const FAQS = [
-  { q: "Does SmartTariff use AI or machine learning?", a: "No. SmartTariff's current recommendation engine is a transparent, rule-based scoring system. It's architected so a machine learning service could be plugged in later without changing the app." },
+  { q: "Does SmartTariff use AI or machine learning?", a: "Yes! SmartTariff uses a trained Random Forest Regressor Machine Learning model (SmartTariff V4.3) with 11 multi-dimensional engineered features to predict personalized plan suitability based on your real data, voice, SMS, and budget." },
   { q: "How are the Top 3 plans chosen?", a: "We score every active plan against your usage and preferences using weighted factors: data match (40%), call match (25%), SMS match (10%), budget fit (15%) and overall value (10%). The 3 highest-scoring plans are returned." },
   { q: "Can I compare plans manually?", a: "Yes. Browse all plans, add up to 3 to your comparison list, and view a detailed side-by-side comparison table." },
   { q: "Is my usage data secure?", a: "Your account is protected with hashed passwords and authenticated sessions. Only you and authorized admins can view your usage and recommendations." },
@@ -63,8 +63,8 @@ export default function LandingPage() {
       <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-white">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-indigo-100 px-4 py-1.5 text-sm font-medium text-indigo-700">
-              <Sparkles className="h-4 w-4" /> Rule-based recommendation engine
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 text-sm font-semibold text-emerald-800 shadow-sm border border-emerald-200">
+              <Sparkles className="h-4 w-4 text-emerald-600 animate-pulse" /> Random Forest ML Model V4.3 Active
             </span>
             <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               Find the Telecom Plan <br className="hidden sm:block" />
