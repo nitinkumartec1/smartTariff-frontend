@@ -184,7 +184,6 @@ export default function CustomerProfileModal({
                 >
                   <option value="28">1 Month (28-30 Days)</option>
                   <option value="84">3 Months (84-90 Days)</option>
-                  <option value="180">6 Months (180 Days)</option>
                   <option value="365">1 Year (365 Days)</option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
