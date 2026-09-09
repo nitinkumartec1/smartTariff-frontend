@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Scale } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { fetchMyUsage } from "@/store/slices/usageSlice";
 import {
@@ -103,6 +105,7 @@ export default function DashboardPage() {
   const dispatch = useDispatch();
   const { records, status: usageStatus } = useSelector((s) => s.usage);
   const { latest, status: recStatus } = useSelector((s) => s.recommendations);
+  const compareList = useSelector((s) => s.plans?.compareList || []);
   const [profile, setProfile] = useState(null);
   const [generating, setGenerating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -234,17 +237,28 @@ export default function DashboardPage() {
               <h2 className="text-sm sm:text-base font-bold text-[#4935D4] tracking-tight">
                 Top 3 Recommended Plans for You
               </h2>
-              {latest?.generatedBy === "ml" ? (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 border border-emerald-200 shadow-sm">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  AI / ML Model Active (V4.3)
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-bold text-[#4935D4] border border-indigo-200 shadow-sm">
-                  <span className="h-2 w-2 rounded-full bg-[#4935D4]"></span>
-                  AI / ML Model Active (V4.3)
-                </span>
-              )}
+              <div className="flex items-center gap-2">
+                {compareList.length > 0 && (
+                  <Link
+                    to="/compare"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 px-2.5 py-0.5 text-[11px] font-bold text-[#4935D4] shadow-sm transition hover:bg-indigo-100 active:scale-95"
+                  >
+                    <Scale className="h-3 w-3 text-[#4935D4]" />
+                    <span>Compare ({compareList.length}/3) &rarr;</span>
+                  </Link>
+                )}
+                {latest?.generatedBy === "ml" ? (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 border border-emerald-200 shadow-sm">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    AI / ML Model Active (V4.3)
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-bold text-[#4935D4] border border-indigo-200 shadow-sm">
+                    <span className="h-2 w-2 rounded-full bg-[#4935D4]"></span>
+                    AI / ML Model Active (V4.3)
+                  </span>
+                )}
+              </div>
             </div>
 
             {recStatus === "loading" || generating ? (

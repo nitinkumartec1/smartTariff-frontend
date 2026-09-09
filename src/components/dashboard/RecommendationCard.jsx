@@ -1,7 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Trophy, Database, Phone, MessageSquare, Calendar, ArrowRight } from "lucide-react";
+import { Trophy, Database, Phone, MessageSquare, Calendar, Scale, Check } from "lucide-react";
+import toast from "react-hot-toast";
 import MatchScore from "./MatchScore";
 import { formatCurrency, formatData, formatMinutes, formatCount } from "@/utils/format";
+import { toggleCompare } from "@/store/slices/planSlice";
 
 const RANK_CONFIGS = {
   1: {
@@ -27,11 +30,60 @@ const RANK_CONFIGS = {
   },
 };
 
-export default function RecommendationCard({ item, rank = 1 }) {
+export default function RecommendationCard({
+  item,
+  rank = 1,
+  onCompareToggle,
+  isComparing: propsIsComparing,
+}) {
+  const dispatch = useDispatch();
+  const compareList = useSelector((s) => s.plans?.compareList || []);
+
   const plan = item?.plan || item;
+  const targetId =
+    plan?._id ||
+    (plan?.planId ? (plan.planId.startsWith("plan_") ? plan.planId : `plan_${plan.planId}`) : null) ||
+    item?.planId ||
+    plan?.planCode;
+
+  const isComparing =
+    propsIsComparing !== undefined
+      ? propsIsComparing
+      : Boolean(
+          (targetId && compareList.includes(targetId)) ||
+          (plan?._id && compareList.includes(plan._id)) ||
+          (plan?.planId && compareList.includes(plan.planId))
+        );
+
   const score = typeof item?.score === "number" ? Math.round(item.score) : (rank === 1 ? 92 : rank === 2 ? 87 : 79);
   const reasons = item?.reasons || [];
   const config = RANK_CONFIGS[rank] || RANK_CONFIGS[1];
+
+  const handleCompareClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!targetId) return;
+
+    if (onCompareToggle) {
+      onCompareToggle(targetId);
+      return;
+    }
+
+    if (isComparing) {
+      const idToRemove =
+        compareList.find((id) => id === targetId || id === plan?._id || id === plan?.planId) || targetId;
+      dispatch(toggleCompare(idToRemove));
+      toast.success(`Removed "${plan?.name || "Plan"}" from comparison`);
+    } else {
+      if (compareList.length >= 3) {
+        toast.error("You can compare up to 3 plans at a time. Remove one to add this.");
+        return;
+      }
+      dispatch(toggleCompare(targetId));
+      toast.success(`Added "${plan?.name || "Plan"}" to comparison (${compareList.length + 1}/3)`);
+    }
+  };
 
   // Primary explanation summary
   const reasonText =
@@ -109,15 +161,15 @@ export default function RecommendationCard({ item, rank = 1 }) {
         </p>
       </div>
 
-      {/* Right: Circular score, Price, View Details CTA */}
+      {/* Right: Circular score, Price, Actions CTA */}
       <div className="flex shrink-0 flex-row sm:flex-row items-center justify-between sm:justify-end gap-5 border-t sm:border-t-0 sm:border-l border-slate-100 p-4 sm:p-5 bg-slate-50/30">
         {/* Circular Progress Ring */}
         <div className="shrink-0">
           <MatchScore score={score} size={60} strokeWidth={5} customColor={config.strokeColor} />
         </div>
 
-        {/* Price & Action */}
-        <div className="flex flex-col items-end gap-2">
+        {/* Price & Action Buttons */}
+        <div className="flex flex-col items-end gap-2.5">
           <div className="text-right">
             <p className="text-lg sm:text-xl font-extrabold tracking-tight text-[#081936] leading-none">
               ₹{plan?.price || 450}
@@ -132,11 +184,36 @@ export default function RecommendationCard({ item, rank = 1 }) {
             )}
           </div>
 
-          <Link to={`/plans/${plan?._id || ""}`}>
-            <button className="rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-bold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-slate-300 active:scale-95 cursor-pointer">
-              View Details
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={handleCompareClick}
+              className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold shadow-sm transition active:scale-95 cursor-pointer whitespace-nowrap ${
+                isComparing
+                  ? "border-[#4935D4] bg-[#4935D4] text-white hover:bg-[#3d2cb8]"
+                  : "border-slate-200 bg-white text-slate-700 hover:bg-indigo-50 hover:text-[#4935D4] hover:border-indigo-200"
+              }`}
+              title={isComparing ? "Remove from comparison" : "Add to comparison (up to 3 plans)"}
+            >
+              {isComparing ? (
+                <>
+                  <Check className="h-3.5 w-3.5 text-white" />
+                  <span>Added</span>
+                </>
+              ) : (
+                <>
+                  <Scale className="h-3.5 w-3.5 text-[#4935D4]" />
+                  <span>Add to Compare</span>
+                </>
+              )}
             </button>
-          </Link>
+
+            <Link to={`/plans/${targetId || ""}`}>
+              <button className="rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-bold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-slate-300 active:scale-95 cursor-pointer whitespace-nowrap">
+                View Details
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

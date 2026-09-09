@@ -74,7 +74,10 @@ export const planApi = {
 
   getById: (id) =>
     simulateRequest(() => {
-      const plan = findById(collections.plans, id);
+      const all = getAll(collections.plans);
+      const plan =
+        all.find((d) => d._id === id || d.planId === id || d.planCode === id) ||
+        findById(collections.plans, id);
       if (!plan) throw Object.assign(new Error("Plan not found"), { status: 404 });
       return plan;
     }),
