@@ -3,7 +3,7 @@
 // running on the backend (/api/v1/recommendations/predict).
 import { simulateRequest } from "./api";
 import { collections, getAll, findOne, findById, insert, genId, paginate } from "@/mockApi/db";
-import { generateRecommendations as generateFallbackRecommendations } from "@/mockApi/recommendationEngine";
+import { generateRecommendations as generateFallbackRecommendations, matchesDuration } from "@/mockApi/recommendationEngine";
 
 const BACKEND_URLS = [
   "http://localhost:8000/api/v1",
@@ -129,7 +129,18 @@ export const recommendationApi = {
       insert(collections.usage, usage);
     }
 
-    const plans = getAll(collections.plans);
+    const allPlans = getAll(collections.plans);
+
+    // Pre-filter plans by preferred duration before sending to ML API
+    let plans = allPlans;
+    if (preferences?.preferredDuration) {
+      const durationFiltered = allPlans.filter((p) =>
+        matchesDuration(p, preferences.preferredDuration)
+      );
+      if (durationFiltered.length > 0) {
+        plans = durationFiltered;
+      }
+    }
 
     // 1. Run inference using SmartTariff V4.3 Random Forest model on backend
     const mlResponse = await callMlModelApi({ usage, preferences, plans });
@@ -139,7 +150,17 @@ export const recommendationApi = {
     let modelName;
 
     if (mlResponse && mlResponse.results?.length > 0) {
-      results = mlResponse.results;
+      // Post-filter ML results to enforce duration match (safety net)
+      let filteredResults = mlResponse.results;
+      if (preferences?.preferredDuration) {
+        const durationMatched = filteredResults.filter(
+          (r) => r.plan && matchesDuration(r.plan, preferences.preferredDuration)
+        );
+        if (durationMatched.length > 0) {
+          filteredResults = durationMatched;
+        }
+      }
+      results = filteredResults.slice(0, 3).map((r, idx) => ({ ...r, rank: idx + 1 }));
       generatedBy = "ml";
       modelName = mlResponse.model;
     } else {
