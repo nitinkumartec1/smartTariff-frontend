@@ -62,6 +62,32 @@ function valueScore(plan) {
   return normalized;
 }
 
+export function parsePreferredDurationMonths(prefDuration) {
+  if (!prefDuration && prefDuration !== 0) return null;
+  const num = Number(prefDuration);
+  if (isNaN(num)) return null;
+  if (num >= 300) return 12;
+  if (num >= 150) return 6;
+  if (num >= 70) return 3;
+  if (num > 12) return 1;
+  return num;
+}
+
+export function getDurationMonths(plan) {
+  if (plan.durationMonths) return Number(plan.durationMonths);
+  const validity = Number(plan.validity) || 28;
+  if (validity >= 300) return 12;
+  if (validity >= 150) return 6;
+  if (validity >= 70) return 3;
+  return 1;
+}
+
+export function matchesDuration(plan, prefDuration) {
+  const targetMonths = parsePreferredDurationMonths(prefDuration);
+  if (targetMonths === null) return true;
+  return getDurationMonths(plan) === targetMonths;
+}
+
 function buildReasons({ plan, dataScore, callScore, smsScore, budgetScr, usage, preferences }) {
   const reasons = [];
 
@@ -69,10 +95,18 @@ function buildReasons({ plan, dataScore, callScore, smsScore, budgetScr, usage, 
     reasons.push(`Bundle deal: Save ${plan.discountPercent}% (₹${plan.discountInr} discount)`);
   }
 
-  if (preferences?.preferredDuration && Number(preferences.preferredDuration) >= 300 && plan.validity >= 300) {
-    reasons.push("Matches your 1 Year annual plan preference");
-  } else if (preferences?.preferredDuration && Number(preferences.preferredDuration) >= 70 && Number(preferences.preferredDuration) < 300 && plan.validity >= 70 && plan.validity < 300) {
-    reasons.push("Matches your 3-Month bundle preference");
+  const targetMonths = parsePreferredDurationMonths(preferences?.preferredDuration);
+  const planMonths = getDurationMonths(plan);
+  if (targetMonths && planMonths === targetMonths) {
+    if (targetMonths === 12) {
+      reasons.push("Matches your 1 Year annual plan preference");
+    } else if (targetMonths === 6) {
+      reasons.push("Matches your 6-Month plan preference");
+    } else if (targetMonths === 3) {
+      reasons.push("Matches your 3-Month bundle preference");
+    } else if (targetMonths === 1) {
+      reasons.push("Matches your 1-Month plan preference");
+    }
   }
 
   if (dataScore >= 85) reasons.push(`Matches your ${plan.dataLimit} GB data usage`);
@@ -121,13 +155,13 @@ export function scorePlan({ plan, usage, preferences }) {
 
   // Preferred duration weight boost
   if (preferences?.preferredDuration) {
-    const pref = Number(preferences.preferredDuration);
-    if (pref >= 300 && plan.validity >= 300) {
-      total = Math.min(100, total * 1.25);
-    } else if (pref >= 70 && pref < 300 && plan.validity >= 70 && plan.validity < 300) {
-      total = Math.min(100, total * 1.2);
-    } else if (pref < 70 && plan.validity < 70) {
-      total = Math.min(100, total * 1.1);
+    const targetMonths = parsePreferredDurationMonths(preferences.preferredDuration);
+    const planMonths = getDurationMonths(plan);
+    if (targetMonths && planMonths === targetMonths) {
+      if (targetMonths === 12) total = Math.min(100, total * 1.25);
+      else if (targetMonths === 3) total = Math.min(100, total * 1.2);
+      else if (targetMonths === 1) total = Math.min(100, total * 1.1);
+      else total = Math.min(100, total * 1.15);
     }
   }
 
@@ -149,7 +183,17 @@ export function scorePlan({ plan, usage, preferences }) {
  * backend controller assembling data before calling the service).
  */
 export function generateRecommendations({ usage, preferences, plans }) {
-  const activePlans = plans.filter((p) => p.isActive);
+  let activePlans = plans.filter((p) => p.isActive !== false);
+
+  // Strictly filter to plans matching preferred duration if specified
+  if (preferences?.preferredDuration) {
+    const durationFiltered = activePlans.filter((p) =>
+      matchesDuration(p, preferences.preferredDuration)
+    );
+    if (durationFiltered.length > 0) {
+      activePlans = durationFiltered;
+    }
+  }
 
   const scored = activePlans.map((plan) => {
     const { score, reasons } = scorePlan({ plan, usage, preferences });
