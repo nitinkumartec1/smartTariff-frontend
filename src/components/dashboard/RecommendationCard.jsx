@@ -116,7 +116,7 @@ export default function RecommendationCard({
       {/* Center: Plan details, specs, reasons */}
       <div className="flex flex-1 flex-col justify-center p-4 sm:p-5">
         <div className="flex flex-wrap items-center gap-2.5">
-          <span className="rounded-md bg-indigo-50 border border-indigo-100 px-2 py-0.5 text-[10px] font-extrabold text-[#4935D4]">
+          <span className="rounded-md bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] font-extrabold text-[#081936]">
             {plan?.planCode || plan?.planId || "PLAN"}
           </span>
           <h3 className="text-base font-bold text-[#081936]">{plan?.name || "Tariff Plan"}</h3>
@@ -178,7 +178,7 @@ export default function RecommendationCard({
               / {plan?.validity || 28} days
             </p>
             {plan?.durationMonths > 1 && (
-              <p className="mt-0.5 text-[10px] font-bold text-[#4935D4]">
+              <p className="mt-0.5 text-[10px] font-bold text-[#081936]">
                 ₹{plan.monthlyEquivalent}/mo
               </p>
             )}
@@ -190,8 +190,8 @@ export default function RecommendationCard({
               onClick={handleCompareClick}
               className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold shadow-sm transition active:scale-95 cursor-pointer whitespace-nowrap ${
                 isComparing
-                  ? "border-[#4935D4] bg-[#4935D4] text-white hover:bg-[#3d2cb8]"
-                  : "border-slate-200 bg-white text-slate-700 hover:bg-indigo-50 hover:text-[#4935D4] hover:border-indigo-200"
+                  ? "border-[#081936] bg-[#081936] text-white hover:bg-[#0D2248]"
+                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-100 hover:text-[#081936] hover:border-slate-300"
               }`}
               title={isComparing ? "Remove from comparison" : "Add to comparison (up to 3 plans)"}
             >
@@ -202,7 +202,7 @@ export default function RecommendationCard({
                 </>
               ) : (
                 <>
-                  <Scale className="h-3.5 w-3.5 text-[#4935D4]" />
+                  <Scale className="h-3.5 w-3.5 text-[#081936]" />
                   <span>Add to Compare</span>
                 </>
               )}

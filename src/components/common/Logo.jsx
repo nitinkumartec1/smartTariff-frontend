@@ -19,7 +19,7 @@ export function LogoIcon({ size = "md", className = "" }) {
 
   return (
     <div
-      className={`flex shrink-0 items-center justify-center bg-[#4935D4] text-white shadow-sm shadow-indigo-200 ${containerClass} ${className}`}
+      className={`flex shrink-0 items-center justify-center bg-[#081936] text-white shadow-sm shadow-slate-900/20 ${containerClass} ${className}`}
     >
       <Radio className={iconClass} />
     </div>

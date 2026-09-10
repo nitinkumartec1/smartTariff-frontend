@@ -59,7 +59,7 @@ export default function PreferencesPage() {
           onClick={() => setActiveTab("preferences")}
           className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition cursor-pointer ${
             activeTab === "preferences"
-              ? "border-[#4935D4] text-[#4935D4]"
+              ? "border-[#081936] text-[#081936]"
               : "border-transparent text-slate-500 hover:text-slate-700"
           }`}
         >
@@ -69,7 +69,7 @@ export default function PreferencesPage() {
           onClick={() => setActiveTab("notifications")}
           className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition cursor-pointer ${
             activeTab === "notifications"
-              ? "border-[#4935D4] text-[#4935D4]"
+              ? "border-[#081936] text-[#081936]"
               : "border-transparent text-slate-500 hover:text-slate-700"
           }`}
         >
@@ -79,7 +79,7 @@ export default function PreferencesPage() {
           onClick={() => setActiveTab("security")}
           className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition cursor-pointer ${
             activeTab === "security"
-              ? "border-[#4935D4] text-[#4935D4]"
+              ? "border-[#081936] text-[#081936]"
               : "border-transparent text-slate-500 hover:text-slate-700"
           }`}
         >

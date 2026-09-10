@@ -8,7 +8,7 @@ export default function Toggle({ checked, onChange, label }) {
         onClick={() => onChange(!checked)}
         className={cn(
           "relative h-6 w-11 rounded-full transition-colors",
-          checked ? "bg-indigo-600" : "bg-slate-300"
+          checked ? "bg-[#081936]" : "bg-slate-300"
         )}
       >
         <span

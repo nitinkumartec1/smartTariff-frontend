@@ -68,7 +68,7 @@ export default function LandingPage() {
             </span>
             <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               Find the Telecom Plan <br className="hidden sm:block" />
-              <span className="text-indigo-600">That Fits Your Usage</span>
+              <span className="text-[#081936]">That Fits Your Usage</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
               SmartTariff analyzes your data, calling and SMS usage — along with your budget — to
@@ -76,7 +76,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link to="/register">
-                <span className="inline-flex items-center gap-2 rounded-xl bg-[#4935D4] px-6 py-3.5 font-bold text-white shadow-lg shadow-indigo-200 transition hover:bg-[#3D2ABF]">
+                <span className="inline-flex items-center gap-2 rounded-xl bg-[#081936] px-6 py-3.5 font-bold text-white shadow-lg shadow-slate-900/10 transition hover:bg-[#0D2248]">
                   Get Started <ArrowRight className="h-4 w-4" />
                 </span>
               </Link>
@@ -96,7 +96,7 @@ export default function LandingPage() {
               ["Up to 16.7%", "Bundle Savings"],
             ].map(([stat, label]) => (
               <div key={label} className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm">
-                <p className="text-2xl font-bold text-indigo-600">{stat}</p>
+                <p className="text-2xl font-bold text-[#081936]">{stat}</p>
                 <p className="mt-1 text-xs text-slate-500">{label}</p>
               </div>
             ))}
@@ -113,7 +113,7 @@ export default function LandingPage() {
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <div key={s.title} className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#081936] text-white">
                 <s.icon className="h-5 w-5" />
               </div>
               <span className="absolute right-5 top-5 text-3xl font-bold text-slate-100">{i + 1}</span>
@@ -134,7 +134,7 @@ export default function LandingPage() {
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f) => (
               <div key={f.title} className="rounded-2xl border border-slate-200 p-6 transition hover:shadow-md">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-[#081936]">
                   <f.icon className="h-5 w-5" />
                 </div>
                 <h3 className="font-semibold text-slate-800">{f.title}</h3>
@@ -147,14 +147,14 @@ export default function LandingPage() {
 
       {/* Benefits / CTA */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-10 rounded-3xl bg-indigo-600 p-10 text-white lg:grid-cols-2 lg:p-16">
+        <div className="grid grid-cols-1 items-center gap-10 rounded-3xl bg-[#081936] p-10 text-white lg:grid-cols-2 lg:p-16">
           <div>
             <h2 className="text-3xl font-bold">Stop overpaying for data you don't use.</h2>
-            <p className="mt-4 text-indigo-100">
+            <p className="mt-4 text-slate-300">
               Most customers are on plans that don't match their real usage. SmartTariff surfaces
               better-fit alternatives instantly — with a transparent score and clear reasoning for every suggestion.
             </p>
-            <Link to="/register" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-medium text-indigo-700 hover:bg-indigo-50">
+            <Link to="/register" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-medium text-[#081936] hover:bg-slate-100">
               Create your free account <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

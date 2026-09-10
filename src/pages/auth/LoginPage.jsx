@@ -58,9 +58,9 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => fillDemo("customer")}
-              className="flex flex-col items-start rounded-lg border border-indigo-100 bg-white p-2 text-left hover:border-indigo-300 hover:bg-indigo-50/50 transition"
+              className="flex flex-col items-start rounded-lg border border-slate-200 bg-white p-2 text-left hover:border-slate-300 hover:bg-slate-50 transition"
             >
-              <span className="font-semibold text-[#4935D4]">Customer Demo</span>
+              <span className="font-semibold text-[#081936]">Customer Demo</span>
               <span className="text-[10px] text-slate-500 truncate w-full">aarav.sharma1@example.com</span>
               <span className="text-[10px] text-slate-400">pass: password123</span>
             </button>
@@ -77,7 +77,7 @@ export default function LoginPage() {
         </div>
 
         <p className="mt-6 text-center text-sm text-slate-500">
-          Don't have an account? <Link to="/register" className="font-medium text-indigo-600">Create one</Link>
+          Don't have an account? <Link to="/register" className="font-medium text-[#081936] hover:underline">Create one</Link>
         </p>
       </div>
     </div>

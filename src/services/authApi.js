@@ -1,10 +1,38 @@
-// Mirrors /api/v1/auth/* routes
-import { simulateRequest } from "./api";
-import { registerUser, loginUser, logoutUser, getCurrentUser } from "@/mockApi/authBackend";
+// Authentication API Service
+// Connects to FastAPI Backend at /api/v1/auth/*
+import { api, setToken } from "./api";
 
 export const authApi = {
-  register: (payload) => simulateRequest(() => registerUser(payload)),
-  login: (payload) => simulateRequest(() => loginUser(payload)),
-  logout: () => simulateRequest(() => { logoutUser(); return null; }),
-  me: () => simulateRequest(() => getCurrentUser(), { latency: 200 }),
+  register: async (payload) => {
+    const res = await api.post("/auth/register", payload);
+    const token = res.data?.accessToken || res.data?.token;
+    if (token) {
+      setToken(token);
+    }
+    return res;
+  },
+
+  login: async (payload) => {
+    const res = await api.post("/auth/login", payload);
+    const token = res.data?.accessToken || res.data?.token;
+    if (token) {
+      setToken(token);
+    }
+    return res;
+  },
+
+  logout: async () => {
+    try {
+      await api.post("/auth/logout");
+    } catch {
+      // ignore network failure on logout
+    } finally {
+      setToken(null);
+    }
+    return { success: true, message: "Logged out" };
+  },
+
+  me: async () => {
+    return api.get("/auth/me");
+  },
 };

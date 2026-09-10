@@ -101,7 +101,7 @@ export default function HistoryPage() {
                         </td>
                         <td className="p-4 sm:p-5 text-right">
                           <Link to={`/recommendations/${r._id}`}>
-                            <button className="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 font-bold text-[#4935D4] hover:bg-indigo-50 transition cursor-pointer">
+                            <button className="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 font-bold text-[#081936] hover:bg-slate-100 transition cursor-pointer">
                               <span>View Run</span>
                               <ArrowRight className="h-3.5 w-3.5" />
                             </button>

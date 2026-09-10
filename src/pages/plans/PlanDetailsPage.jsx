@@ -56,7 +56,7 @@ export default function PlanDetailsPage() {
     <div className="mx-auto max-w-5xl space-y-6">
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#4935D4] transition cursor-pointer"
+        className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#081936] transition cursor-pointer"
       >
         <ArrowLeft className="h-4 w-4" /> Back to Catalogue
       </button>
@@ -69,7 +69,7 @@ export default function PlanDetailsPage() {
             <div className="flex flex-col sm:flex-row items-start justify-between gap-4 border-b border-slate-100 bg-[#FAFAFE] p-6">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-indigo-50 border border-indigo-100 px-2.5 py-0.5 text-xs font-extrabold text-[#4935D4]">
+                  <span className="rounded-md bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-xs font-extrabold text-[#081936]">
                     {plan.planCode || plan.planId || "PLAN"}
                   </span>
                 </div>
@@ -90,7 +90,7 @@ export default function PlanDetailsPage() {
                 <p className="text-3xl font-extrabold text-[#081936]">{formatCurrency(plan.price)}</p>
                 <p className="text-xs text-slate-400">Total for {plan.validity} days</p>
                 {plan.durationMonths > 1 && (
-                  <p className="mt-1 text-xs font-bold text-[#4935D4]">
+                  <p className="mt-1 text-xs font-bold text-[#081936]">
                     ₹{plan.monthlyEquivalent}/month equivalent
                   </p>
                 )}
@@ -120,7 +120,7 @@ export default function PlanDetailsPage() {
                   [Calendar, "Validity Period", `${plan.validity} Days (${plan.durationMonths || 1}M)`],
                 ].map(([Icon, label, val]) => (
                   <div key={label} className="rounded-xl border border-slate-100 bg-[#FAFAFE] p-3.5 text-center">
-                    <Icon className="mx-auto mb-1.5 h-4 w-4 text-[#4935D4]" />
+                    <Icon className="mx-auto mb-1.5 h-4 w-4 text-[#081936]" />
                     <p className="text-[10px] font-medium text-slate-400">{label}</p>
                     <p className="mt-0.5 text-xs font-bold text-[#081936]">{val}</p>
                   </div>

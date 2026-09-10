@@ -15,11 +15,11 @@ export default function Footer() {
           <div>
             <h4 className="mb-3 text-sm font-semibold text-slate-900">Product</h4>
             <ul className="space-y-2 text-sm text-slate-500">
-              <li><Link to="/plans" className="hover:text-indigo-600">Browse Plans</Link></li>
-              <li><Link to="/register" className="hover:text-indigo-600">Get Recommendations</Link></li>
-              <li><Link to="/#how-it-works" className="hover:text-indigo-600">How It Works</Link></li>
-              <li><Link to="/#faq" className="hover:text-indigo-600">FAQ</Link></li>
-              <li><Link to="/login" className="hover:text-indigo-600">Sign In</Link></li>
+              <li><Link to="/plans" className="hover:text-[#081936]">Browse Plans</Link></li>
+              <li><Link to="/register" className="hover:text-[#081936]">Get Recommendations</Link></li>
+              <li><Link to="/#how-it-works" className="hover:text-[#081936]">How It Works</Link></li>
+              <li><Link to="/#faq" className="hover:text-[#081936]">FAQ</Link></li>
+              <li><Link to="/login" className="hover:text-[#081936]">Sign In</Link></li>
             </ul>
           </div>
           <div>

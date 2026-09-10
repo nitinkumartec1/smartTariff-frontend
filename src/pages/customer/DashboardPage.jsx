@@ -234,16 +234,16 @@ export default function DashboardPage() {
           {/* Top 3 Recommended Plans Section */}
           <div className="space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h2 className="text-sm sm:text-base font-bold text-[#4935D4] tracking-tight">
+              <h2 className="text-sm sm:text-base font-bold text-[#081936] tracking-tight">
                 Top 3 Recommended Plans for You
               </h2>
               <div className="flex items-center gap-2">
                 {compareList.length > 0 && (
                   <Link
                     to="/compare"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 px-2.5 py-0.5 text-[11px] font-bold text-[#4935D4] shadow-sm transition hover:bg-indigo-100 active:scale-95"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-[11px] font-bold text-[#081936] shadow-sm transition hover:bg-slate-200 active:scale-95"
                   >
-                    <Scale className="h-3 w-3 text-[#4935D4]" />
+                    <Scale className="h-3 w-3 text-[#081936]" />
                     <span>Compare ({compareList.length}/3) &rarr;</span>
                   </Link>
                 )}
@@ -253,8 +253,8 @@ export default function DashboardPage() {
                     AI / ML Model Active (V4.3)
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-bold text-[#4935D4] border border-indigo-200 shadow-sm">
-                    <span className="h-2 w-2 rounded-full bg-[#4935D4]"></span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-bold text-[#081936] border border-slate-200 shadow-sm">
+                    <span className="h-2 w-2 rounded-full bg-[#081936]"></span>
                     AI / ML Model Active (V4.3)
                   </span>
                 )}

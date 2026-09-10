@@ -11,7 +11,7 @@ export default function Select({ label, error, className, id, children, ...props
       <select
         id={id}
         className={cn(
-          "w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100",
+          "w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-[#081936] focus:ring-2 focus:ring-[#081936]/10",
           error && "border-rose-400",
           className
         )}

@@ -57,7 +57,7 @@ export default function CustomerProfileForm({
               placeholder="200"
               value={formData.dataUsage}
               onChange={(e) => handleChange("dataUsage", e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#4935D4] focus:ring-2 focus:ring-[#4935D4]/20"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#081936] focus:ring-2 focus:ring-[#081936]/20"
               required
             />
           </div>
@@ -74,7 +74,7 @@ export default function CustomerProfileForm({
               placeholder="1000"
               value={formData.callMinutes}
               onChange={(e) => handleChange("callMinutes", e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#4935D4] focus:ring-2 focus:ring-[#4935D4]/20"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#081936] focus:ring-2 focus:ring-[#081936]/20"
               required
             />
           </div>
@@ -91,7 +91,7 @@ export default function CustomerProfileForm({
               placeholder="500"
               value={formData.smsCount}
               onChange={(e) => handleChange("smsCount", e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#4935D4] focus:ring-2 focus:ring-[#4935D4]/20"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#081936] focus:ring-2 focus:ring-[#081936]/20"
               required
             />
           </div>
@@ -108,7 +108,7 @@ export default function CustomerProfileForm({
               placeholder="1000"
               value={formData.currentSpending}
               onChange={(e) => handleChange("currentSpending", e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#4935D4] focus:ring-2 focus:ring-[#4935D4]/20"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#081936] focus:ring-2 focus:ring-[#081936]/20"
               required
             />
           </div>
@@ -125,7 +125,7 @@ export default function CustomerProfileForm({
               placeholder="10000"
               value={formData.monthlyBudget}
               onChange={(e) => handleChange("monthlyBudget", e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#4935D4] focus:ring-2 focus:ring-[#4935D4]/20"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 outline-none transition focus:border-[#081936] focus:ring-2 focus:ring-[#081936]/20"
               required
             />
           </div>
@@ -139,7 +139,7 @@ export default function CustomerProfileForm({
               <select
                 value={formData.preferredDuration}
                 onChange={(e) => handleChange("preferredDuration", e.target.value)}
-                className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm font-medium text-slate-800 outline-none transition focus:border-[#4935D4] focus:ring-2 focus:ring-[#4935D4]/20 cursor-pointer"
+                className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm font-medium text-slate-800 outline-none transition focus:border-[#081936] focus:ring-2 focus:ring-[#081936]/20 cursor-pointer"
               >
                 <option value="28">1 Month (28-30 Days)</option>
                 <option value="84">3 Months (84-90 Days)</option>
@@ -159,7 +159,7 @@ export default function CustomerProfileForm({
           <Button
             type="submit"
             loading={loading}
-            className="rounded-xl bg-[#4935D4] hover:bg-[#3D2BB8] px-7 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 transition cursor-pointer flex items-center gap-2"
+            className="rounded-xl bg-[#081936] hover:bg-[#0D2248] px-7 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/10 transition cursor-pointer flex items-center gap-2"
           >
             <span>Find My Plans</span>
             <ArrowRight className="h-4 w-4" />

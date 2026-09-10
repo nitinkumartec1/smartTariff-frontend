@@ -16,7 +16,7 @@ export default function DashboardHero() {
       <div className="hidden md:flex items-center gap-3 shrink-0 select-none">
         <div className="relative flex items-center justify-center">
           {/* Subtle floating bubble 1: WiFi */}
-          <div className="absolute -top-3 left-4 flex h-7 w-7 items-center justify-center rounded-full bg-indigo-50 border border-indigo-100 text-[#4935D4] shadow-sm animate-bounce duration-1000">
+          <div className="absolute -top-3 left-4 flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 border border-slate-200 text-[#081936] shadow-sm animate-bounce duration-1000">
             <Wifi className="h-3.5 w-3.5" />
           </div>
           {/* Subtle floating bubble 2: Phone */}
@@ -25,7 +25,7 @@ export default function DashboardHero() {
           </div>
 
           {/* Clean Vector Character Avatar */}
-          <div className="h-16 w-16 overflow-hidden rounded-full bg-gradient-to-tr from-indigo-100 to-purple-50 ring-4 ring-white shadow-md flex items-center justify-center">
+          <div className="h-16 w-16 overflow-hidden rounded-full bg-gradient-to-tr from-slate-100 to-slate-50 ring-4 ring-white shadow-md flex items-center justify-center">
             <svg viewBox="0 0 100 100" className="h-full w-full object-cover">
               <circle cx="50" cy="50" r="50" fill="#EEECFC" />
               {/* Hair back */}
@@ -35,7 +35,7 @@ export default function DashboardHero() {
               {/* Hair front */}
               <path d="M30 40 Q 50 25 70 40 Q 60 30 50 32 Q 40 30 30 40 Z" fill="#202124" />
               {/* Clothes */}
-              <path d="M24 95 Q 50 72 76 95 Z" fill="#4935D4" />
+              <path d="M24 95 Q 50 72 76 95 Z" fill="#081936" />
               {/* Smartphone */}
               <rect x="58" y="52" width="12" height="22" rx="2" fill="#081936" transform="rotate(-10 58 52)" />
               <rect x="60" y="54" width="8" height="15" rx="1" fill="#60A5FA" transform="rotate(-10 58 52)" />

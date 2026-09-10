@@ -18,14 +18,14 @@ export default function UsageVsPlan({ usage, topPlan }) {
 
   return (
     <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)]">
-      <h2 className="text-sm font-bold text-[#4935D4] tracking-tight">
+      <h2 className="text-sm font-bold text-[#081936] tracking-tight">
         Your Usage vs Plan (Top 1)
       </h2>
 
       {/* Legend */}
       <div className="mt-2.5 flex items-center gap-4 text-[11px] font-medium text-slate-500">
         <div className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-sm bg-[#4935D4]" />
+          <span className="h-2.5 w-2.5 rounded-sm bg-[#081936]" />
           <span>Your Usage</span>
         </div>
         <div className="flex items-center gap-1.5">
@@ -52,7 +52,7 @@ export default function UsageVsPlan({ usage, topPlan }) {
           <div className="flex items-center gap-2">
             <div className="relative h-2 w-full flex-1 overflow-hidden rounded-full bg-[#E2E8F0]">
               <div
-                className="h-full rounded-full bg-[#4935D4] transition-all duration-700"
+                className="h-full rounded-full bg-[#081936] transition-all duration-700"
                 style={{ width: `${dataPercentage}%` }}
               />
             </div>
@@ -78,7 +78,7 @@ export default function UsageVsPlan({ usage, topPlan }) {
           <div className="flex items-center gap-2">
             <div className="relative h-2 w-full flex-1 overflow-hidden rounded-full bg-[#E2E8F0]">
               <div
-                className="h-full rounded-full bg-[#4935D4] transition-all duration-700"
+                className="h-full rounded-full bg-[#081936] transition-all duration-700"
                 style={{ width: `${callsPercentage}%` }}
               />
             </div>
@@ -92,7 +92,7 @@ export default function UsageVsPlan({ usage, topPlan }) {
         <div>
           <div className="mb-1 flex items-center justify-between text-xs font-semibold">
             <div className="flex items-center gap-2 text-slate-700">
-              <div className="flex h-5 w-5 items-center justify-center rounded bg-purple-50 text-[#4935D4]">
+              <div className="flex h-5 w-5 items-center justify-center rounded bg-purple-50 text-[#081936]">
                 <MessageSquare className="h-3 w-3" />
               </div>
               <span>SMS</span>
@@ -104,7 +104,7 @@ export default function UsageVsPlan({ usage, topPlan }) {
           <div className="flex items-center gap-2">
             <div className="relative h-2 w-full flex-1 overflow-hidden rounded-full bg-[#E2E8F0]">
               <div
-                className="h-full rounded-full bg-[#4935D4] transition-all duration-700"
+                className="h-full rounded-full bg-[#081936] transition-all duration-700"
                 style={{ width: `${smsPercentage}%` }}
               />
             </div>

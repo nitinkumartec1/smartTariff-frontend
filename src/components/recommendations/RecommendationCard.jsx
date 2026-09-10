@@ -16,7 +16,7 @@ export default function RecommendationCard({ item, onCompareToggle, isComparing 
 
   return (
     <Card className="relative flex flex-col overflow-hidden">
-      <div className={`flex items-center justify-between bg-gradient-to-r ${RANK_STYLES[rank] || "from-indigo-400 to-indigo-600"} px-5 py-3 text-white`}>
+      <div className={`flex items-center justify-between bg-gradient-to-r ${RANK_STYLES[rank] || "from-slate-700 to-[#081936]"} px-5 py-3 text-white`}>
         <div className="flex items-center gap-2 font-semibold">
           <Trophy className="h-4 w-4" /> Rank #{rank}
         </div>
@@ -27,21 +27,21 @@ export default function RecommendationCard({ item, onCompareToggle, isComparing 
       </div>
 
       <div className="flex-1 px-5 py-4">
-        {plan.category && <p className="text-xs font-medium uppercase text-indigo-500">{plan.category}</p>}
+        {plan.category && <p className="text-xs font-medium uppercase text-[#081936]">{plan.category}</p>}
         <h3 className="mt-0.5 text-lg font-semibold text-slate-900">{plan.name}</h3>
         <p className={`mt-1 text-2xl font-bold ${scoreColor(score)}`}>{formatCurrency(plan.price)}<span className="text-sm font-normal text-slate-400">/month</span></p>
 
         <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-slate-50 p-3 text-center text-xs">
           <div>
-            <Wifi className="mx-auto mb-1 h-4 w-4 text-indigo-500" />
+            <Wifi className="mx-auto mb-1 h-4 w-4 text-[#081936]" />
             <p className="font-semibold text-slate-800">{formatData(plan.dataLimit)}</p>
           </div>
           <div>
-            <Phone className="mx-auto mb-1 h-4 w-4 text-indigo-500" />
+            <Phone className="mx-auto mb-1 h-4 w-4 text-[#081936]" />
             <p className="font-semibold text-slate-800">{formatMinutes(plan.callMinutes)}</p>
           </div>
           <div>
-            <MessageSquare className="mx-auto mb-1 h-4 w-4 text-indigo-500" />
+            <MessageSquare className="mx-auto mb-1 h-4 w-4 text-[#081936]" />
             <p className="font-semibold text-slate-800">{formatCount(plan.smsLimit)}</p>
           </div>
         </div>

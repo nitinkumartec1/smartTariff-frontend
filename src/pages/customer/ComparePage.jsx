@@ -70,7 +70,7 @@ export default function ComparePage() {
     {
       label: "Plan Code",
       render: (p) => (
-        <span className="rounded-md bg-indigo-50 border border-indigo-100 px-2 py-0.5 text-xs font-extrabold text-[#4935D4]">
+        <span className="rounded-md bg-slate-100 border border-slate-200 px-2 py-0.5 text-xs font-extrabold text-[#081936]">
           {p.planCode || p.planId || "PLAN"}
         </span>
       ),
@@ -89,7 +89,7 @@ export default function ComparePage() {
     {
       label: "Monthly Equivalent",
       render: (p) => (
-        <span className="font-bold text-[#4935D4]">
+        <span className="font-bold text-[#081936]">
           {p.monthlyEquivalent ? `₹${p.monthlyEquivalent}/mo` : formatCurrency(p.price)}
         </span>
       ),
@@ -181,7 +181,7 @@ export default function ComparePage() {
         <div>
           <button
             onClick={() => navigate("/plans")}
-            className="mb-2 inline-flex items-center gap-1.5 text-xs font-bold text-[#4935D4] hover:underline cursor-pointer"
+            className="mb-2 inline-flex items-center gap-1.5 text-xs font-bold text-[#081936] hover:underline cursor-pointer"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to Plans
@@ -227,7 +227,7 @@ export default function ComparePage() {
                 <th key={p._id} className="p-4 sm:p-5 text-left w-1/4">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <span className="rounded-md bg-indigo-50 border border-indigo-100 px-1.5 py-0.5 text-[10px] font-extrabold text-[#4935D4]">
+                      <span className="rounded-md bg-slate-100 border border-slate-200 px-1.5 py-0.5 text-[10px] font-extrabold text-[#081936]">
                         {p.planCode || p.planId || "PLAN"}
                       </span>
                       <h3 className="mt-1 font-extrabold text-sm text-[#081936]">{p.name}</h3>

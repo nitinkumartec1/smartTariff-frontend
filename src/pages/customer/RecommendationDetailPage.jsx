@@ -38,7 +38,7 @@ export default function RecommendationDetailPage() {
     <div className="space-y-6">
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#4935D4] transition cursor-pointer"
+        className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#081936] transition cursor-pointer"
       >
         <ArrowLeft className="h-4 w-4" /> Back to History
       </button>

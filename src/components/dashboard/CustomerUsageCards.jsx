@@ -76,7 +76,7 @@ export default function CustomerUsageCards({
       value: usage.monthlyBudget || 500,
       unit: "INR",
       subtext: "amount in ₹",
-      iconBg: "bg-indigo-50 text-indigo-600 border border-indigo-100/60",
+      iconBg: "bg-slate-100 text-[#081936] border border-slate-200/60",
       icon: IndianRupee,
     },
     {
@@ -112,7 +112,7 @@ export default function CustomerUsageCards({
           variant="primary"
           size="sm"
           icon={Edit3}
-          className="rounded-xl shadow-md shadow-indigo-500/20 text-xs font-bold py-2 px-3.5 flex items-center gap-1.5 cursor-pointer"
+          className="rounded-xl shadow-md text-xs font-bold py-2 px-3.5 flex items-center gap-1.5 cursor-pointer"
         >
           <span>Set Input</span>
         </Button>
@@ -126,7 +126,7 @@ export default function CustomerUsageCards({
             <div
               key={card.id}
               onClick={onOpenForm}
-              className="group relative cursor-pointer rounded-2xl border border-slate-100 bg-white p-4 sm:p-5 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.03)] hover:border-[#4935D4]/40 hover:shadow-md transition-all duration-200"
+              className="group relative cursor-pointer rounded-2xl border border-slate-100 bg-white p-4 sm:p-5 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.03)] hover:border-[#081936]/40 hover:shadow-md transition-all duration-200"
             >
               {/* Top Row: Icon + Label */}
               <div className="flex items-center gap-3">
@@ -155,7 +155,7 @@ export default function CustomerUsageCards({
                 <span className="text-[11px] font-medium text-slate-400">
                   {card.subtext}
                 </span>
-                <span className="text-[10px] font-semibold text-[#4935D4] opacity-0 group-hover:opacity-100 transition">
+                <span className="text-[10px] font-semibold text-[#081936] opacity-0 group-hover:opacity-100 transition">
                   Edit →
                 </span>
               </div>

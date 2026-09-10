@@ -64,7 +64,7 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Left Column: Avatar & Summary Card */}
         <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] text-center flex flex-col items-center justify-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-purple-100 text-2xl font-extrabold text-[#4935D4] ring-4 ring-purple-50 shadow-inner">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-100 text-2xl font-extrabold text-[#081936] ring-4 ring-slate-200 shadow-inner">
             {initials}
           </div>
           <h2 className="mt-3 text-lg font-bold text-[#081936]">{displayName}</h2>
@@ -89,7 +89,7 @@ export default function ProfilePage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Edit Form */}
           <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)]">
-            <h3 className="text-sm font-bold text-[#4935D4] tracking-tight mb-4">
+            <h3 className="text-sm font-bold text-[#081936] tracking-tight mb-4">
               Personal Information
             </h3>
             <form onSubmit={handleSave} className="space-y-4">
@@ -135,7 +135,7 @@ export default function ProfilePage() {
             {currentPlan ? (
               <div className="rounded-xl border border-slate-100 bg-[#FAFAFE] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="rounded-md bg-indigo-50 border border-indigo-100 px-2 py-0.5 text-[10px] font-extrabold text-[#4935D4]">
+                  <span className="rounded-md bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] font-extrabold text-[#081936]">
                     {currentPlan.planCode || currentPlan.planId || "PLAN"}
                   </span>
                   <p className="mt-1 text-base font-bold text-[#081936]">{currentPlan.name}</p>

@@ -1,86 +1,65 @@
-// Mirrors /api/v1/usage/* routes
-import { simulateRequest } from "./api";
-import { collections, getAll, findById, insert, updateById, removeById, genId, paginate } from "@/mockApi/db";
-
-function sortByMonthDesc(records) {
-  return [...records].sort((a, b) => (a.month < b.month ? 1 : -1));
-}
+// Usage Telemetry API Service
+// Connects to FastAPI Backend at /api/v1/usage/* and /api/v1/admin/usage/*
+import { api } from "./api";
 
 export const usageApi = {
-  getMine: (customerId) =>
-    simulateRequest(() => sortByMonthDesc(getAll(collections.usage).filter((u) => u.customerId === customerId))),
+  getMine: async () => {
+    const res = await api.get("/usage/me", { limit: 100 });
+    const docs = res.data?.docs || (Array.isArray(res.data) ? res.data : []);
+    return {
+      success: true,
+      message: res.message,
+      data: docs,
+    };
+  },
 
-  getForCustomer: (customerId) =>
-    simulateRequest(() => sortByMonthDesc(getAll(collections.usage).filter((u) => u.customerId === customerId))),
+  getForCustomer: async (customerId) => {
+    const res = await api.get(`/admin/customers/${customerId}`);
+    const usage = res.data?.usage || [];
+    return {
+      success: true,
+      message: res.message,
+      data: usage,
+    };
+  },
 
-  create: (payload) =>
-    simulateRequest(() => {
-      const record = {
-        _id: genId("usage"),
-        numberOfCalls: payload.numberOfCalls || Math.max(5, Math.round((payload.callMinutes || 0) / 4)),
-        averageCallDuration: payload.callMinutes && payload.numberOfCalls ? Number((payload.callMinutes / payload.numberOfCalls).toFixed(1)) : 0,
-        createdAt: new Date().toISOString(),
-        ...payload,
-      };
-      insert(collections.usage, record);
-      return record;
-    }),
+  create: async (payload) => {
+    return api.post("/usage", payload);
+  },
 
-  update: (id, payload) =>
-    simulateRequest(() => {
-      const updated = updateById(collections.usage, id, payload);
-      if (!updated) throw Object.assign(new Error("Usage record not found"), { status: 404 });
-      return updated;
-    }),
+  update: async (id, payload) => {
+    return api.patch(`/usage/${id}`, payload);
+  },
 
-  remove: (id) =>
-    simulateRequest(() => {
-      const success = removeById(collections.usage, id);
-      if (!success) throw Object.assign(new Error("Usage record not found"), { status: 404 });
-      return { removed: true };
-    }),
+  listAll: async (params = {}) => {
+    return api.get("/admin/usage", params);
+  },
 
-  listAll: ({ page = 1, limit = 10, search, month } = {}) =>
-    simulateRequest(() => {
-      const users = getAll(collections.users);
-      let records = getAll(collections.usage).map((u) => {
-        const customer = users.find((usr) => usr._id === u.customerId);
-        return { ...u, customerName: customer?.name || "Unknown", customerEmail: customer?.email || "" };
-      });
-      if (month) records = records.filter((r) => r.month === month);
-      if (search) {
-        const q = search.toLowerCase();
-        records = records.filter((r) => r.customerName.toLowerCase().includes(q) || r.customerEmail.toLowerCase().includes(q));
-      }
-      records = sortByMonthDesc(records);
-      return paginate(records, page, limit);
-    }),
+  bulkImport: async (fileOrRows) => {
+    if (fileOrRows instanceof File) {
+      const formData = new FormData();
+      formData.append("file", fileOrRows);
+      return api.post("/admin/usage/import", formData);
+    }
+    // If rows array passed, convert to CSV Blob
+    const headers = ["customerId", "month", "dataUsage", "callMinutes", "smsCount", "numberOfCalls"];
+    const csvContent = [
+      headers.join(","),
+      ...fileOrRows.map((r) =>
+        [
+          r.customerId || r.userId || "",
+          r.month || "",
+          r.dataUsage || 0,
+          r.callMinutes || 0,
+          r.smsCount || 0,
+          r.numberOfCalls || 0,
+        ].join(",")
+      ),
+    ].join("\n");
 
-  bulkImport: (rows) =>
-    simulateRequest(() => {
-      const users = getAll(collections.users);
-      const created = [];
-      const errors = [];
-      rows.forEach((row, idx) => {
-        const customer = users.find((u) => u._id === row.customerId || u.email === row.customerId);
-        if (!customer) {
-          errors.push({ row: idx + 1, message: `Customer '${row.customerId}' not found` });
-          return;
-        }
-        const record = {
-          _id: genId("usage"),
-          customerId: customer._id,
-          dataUsage: Number(row.dataUsage) || 0,
-          callMinutes: Number(row.callMinutes) || 0,
-          smsCount: Number(row.smsCount) || 0,
-          numberOfCalls: Number(row.numberOfCalls) || Math.max(5, Math.round((Number(row.callMinutes) || 0) / 4)),
-          averageCallDuration: 0,
-          month: row.month,
-          createdAt: new Date().toISOString(),
-        };
-        insert(collections.usage, record);
-        created.push(record);
-      });
-      return { created: created.length, errors };
-    }),
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const formData = new FormData();
+    formData.append("file", blob, "usage_import.csv");
+    return api.post("/admin/usage/import", formData);
+  },
 };

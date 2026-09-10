@@ -47,14 +47,14 @@ export default function Sidebar({ variant = "customer", onItemClick, onAskAssist
       <div>
         {/* Brand Logo Box */}
         <div className="flex items-center gap-3 px-6 pt-6 pb-5">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#4935D4] text-white shadow-lg shadow-indigo-900/40">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#0D2248] border border-blue-900/50 text-white shadow-lg shadow-black/20">
             <Radio className="h-5 w-5 animate-pulse-subtle" />
           </div>
           <div>
             <div className="flex items-center gap-1.5 font-bold tracking-tight text-white">
               <span className="text-base">SmartTariff</span>
               {variant === "admin" && (
-                <span className="rounded bg-indigo-500/20 px-1.5 py-0.5 text-[9px] font-bold text-indigo-300">
+                <span className="rounded bg-blue-500/20 px-1.5 py-0.5 text-[9px] font-bold text-blue-300">
                   ADMIN
                 </span>
               )}
@@ -74,7 +74,7 @@ export default function Sidebar({ variant = "customer", onItemClick, onAskAssist
               className={({ isActive }) =>
                 `group flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-xs font-semibold tracking-wide transition-all duration-150 ${
                   isActive
-                    ? "bg-[#4935D4] text-white shadow-md shadow-indigo-900/50"
+                    ? "bg-[#0D2248] text-white shadow-md shadow-black/30 border border-blue-800/40"
                     : "text-slate-300 hover:bg-white/[0.07] hover:text-white"
                 }`
               }

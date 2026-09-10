@@ -28,9 +28,9 @@ export default function AdminDashboardPage() {
       {data && (
         <>
           {/* ML Engine Status Banner */}
-          <div className="rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 via-purple-50/50 to-white p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 bg-gradient-to-r from-slate-50 via-white to-white p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-200">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#081936] text-white shadow-md">
                 <Cpu className="h-5 w-5" />
               </div>
               <div>
@@ -46,7 +46,7 @@ export default function AdminDashboardPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="rounded-lg bg-white border border-indigo-100 px-3 py-1.5 text-xs font-semibold text-indigo-700 shadow-xs">
+              <span className="rounded-lg bg-white border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#081936] shadow-xs">
                 20 Active Tariff Plans Seeded
               </span>
             </div>
@@ -65,7 +65,7 @@ export default function AdminDashboardPage() {
 }
 
 function StatCard({ icon: Icon, label, value, color }) {
-  const colors = { indigo: "bg-indigo-50 text-indigo-600", emerald: "bg-emerald-50 text-emerald-600", purple: "bg-purple-50 text-purple-600", amber: "bg-amber-50 text-amber-600" };
+  const colors = { indigo: "bg-slate-100 text-[#081936]", emerald: "bg-emerald-50 text-emerald-600", purple: "bg-slate-100 text-[#081936]", amber: "bg-amber-50 text-amber-600" };
   return (
     <Card>
       <CardBody>

@@ -11,11 +11,11 @@ export default function RecommendationReasons() {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)]">
       {/* Decorative Shield Icon top-right */}
-      <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-50 text-[#4935D4] shadow-sm">
-        <Shield className="h-5 w-5 fill-[#4935D4] text-[#4935D4]" />
+      <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-[#081936] shadow-sm">
+        <Shield className="h-5 w-5 fill-[#081936] text-[#081936]" />
       </div>
 
-      <h2 className="text-sm font-bold text-[#4935D4] tracking-tight">
+      <h2 className="text-sm font-bold text-[#081936] tracking-tight">
         Why these plans?
       </h2>
 

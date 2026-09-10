@@ -40,7 +40,7 @@ export default function PlanCard({ plan, onCompareToggle, isComparing, compareDi
       <div className="flex items-start justify-between gap-2 border-b border-slate-100 bg-[#FAFAFE] px-5 py-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded-md bg-indigo-50 border border-indigo-100 px-2 py-0.5 text-[11px] font-extrabold text-[#4935D4]">
+            <span className="rounded-md bg-slate-100 border border-slate-200 px-2 py-0.5 text-[11px] font-extrabold text-[#081936]">
               {plan.planCode || plan.planId || "PLAN"}
             </span>
           </div>
@@ -65,7 +65,7 @@ export default function PlanCard({ plan, onCompareToggle, isComparing, compareDi
               <span className="text-xs font-medium text-slate-400">/{plan.validity} days</span>
             </div>
             {isMultiMonth && (
-              <p className="mt-0.5 text-[11px] font-semibold text-[#4935D4]">
+              <p className="mt-0.5 text-[11px] font-semibold text-[#081936]">
                 ₹{plan.monthlyEquivalent}/mo equivalent • {plan.offerType || `${plan.durationMonths}-Month Bundle`}
               </p>
             )}
@@ -73,15 +73,15 @@ export default function PlanCard({ plan, onCompareToggle, isComparing, compareDi
 
           <div className="grid grid-cols-2 gap-3 text-xs font-medium">
             <div className="flex items-center gap-2 text-slate-600">
-              <Database className="h-4 w-4 text-[#4935D4]" />
+              <Database className="h-4 w-4 text-[#081936]" />
               <span>{formatData(plan.dataLimit)}/mo</span>
             </div>
             <div className="flex items-center gap-2 text-slate-600">
-              <Phone className="h-4 w-4 text-[#4935D4]" />
+              <Phone className="h-4 w-4 text-[#081936]" />
               <span>{plan.callMinutes >= 999999 || plan.callMinutes === null ? "Unlimited Voice" : formatMinutes(plan.callMinutes)}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-600">
-              <MessageSquare className="h-4 w-4 text-[#4935D4]" />
+              <MessageSquare className="h-4 w-4 text-[#081936]" />
               <span>{formatCount(plan.smsLimit)} SMS/mo</span>
             </div>
             <div className="flex items-center gap-2 text-slate-600">

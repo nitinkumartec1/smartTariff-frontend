@@ -6,7 +6,7 @@ const VARIANTS = {
   warning: "bg-amber-50 text-amber-700 border border-amber-200/60 font-semibold",
   danger: "bg-rose-50 text-rose-700 border border-rose-200/60 font-semibold",
   info: "bg-blue-50 text-blue-700 border border-blue-200/60 font-semibold",
-  purple: "bg-indigo-50 text-[#4935D4] border border-indigo-100 font-semibold",
+  purple: "bg-slate-100 text-[#081936] border border-slate-200 font-semibold",
 };
 
 export default function Badge({ children, variant = "default", className }) {

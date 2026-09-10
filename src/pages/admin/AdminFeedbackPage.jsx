@@ -56,7 +56,7 @@ export default function AdminFeedbackPage() {
             onClick={() => setFilter("all")}
             className={`rounded-xl px-3 py-1.5 text-xs font-bold transition cursor-pointer ${
               filter === "all"
-                ? "bg-[#4935D4] text-white shadow-sm"
+                ? "bg-[#081936] text-white shadow-sm"
                 : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
             }`}
           >

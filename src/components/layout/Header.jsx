@@ -62,7 +62,7 @@ export default function Header({ onMenuClick, onAskAssistant }) {
         </button>
 
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#4935D4] text-white shadow-sm shadow-indigo-200">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#081936] text-white shadow-sm shadow-slate-900/20">
             <Radio className="h-5 w-5" />
           </div>
           <div>
@@ -84,7 +84,7 @@ export default function Header({ onMenuClick, onAskAssistant }) {
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="flex items-center gap-3 rounded-xl p-1.5 transition hover:bg-slate-50 cursor-pointer"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 font-bold text-[#4935D4] ring-2 ring-purple-200">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 font-bold text-[#081936] ring-2 ring-slate-200">
               {initials}
             </div>
             <div className="hidden text-left sm:block">
@@ -109,7 +109,7 @@ export default function Header({ onMenuClick, onAskAssistant }) {
               <Link
                 to="/profile"
                 onClick={() => setDropdownOpen(false)}
-                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-[#4935D4]"
+                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-[#081936]"
               >
                 <User className="h-4 w-4" /> My Profile
               </Link>
@@ -117,7 +117,7 @@ export default function Header({ onMenuClick, onAskAssistant }) {
               <Link
                 to="/settings"
                 onClick={() => setDropdownOpen(false)}
-                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-[#4935D4]"
+                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-[#081936]"
               >
                 <Settings className="h-4 w-4" /> Preferences & Settings
               </Link>

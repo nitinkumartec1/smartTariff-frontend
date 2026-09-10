@@ -12,7 +12,7 @@ export default function UsageSummary({ usage, budget, onGetRecommendations, load
   return (
     <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)]">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-bold text-[#4935D4] tracking-tight">
+        <h2 className="text-sm font-bold text-[#081936] tracking-tight">
           Your Monthly Usage
         </h2>
       </div>
@@ -70,7 +70,7 @@ export default function UsageSummary({ usage, budget, onGetRecommendations, load
         {/* Monthly Budget */}
         <div className="flex flex-col justify-between rounded-xl border border-slate-100 bg-[#FAFAFE] p-3.5 transition hover:border-slate-200">
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-50 text-[#4935D4]">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 text-[#081936]">
               <IndianRupee className="h-4 w-4" />
             </div>
             <span className="text-xs font-semibold text-slate-600">Monthly Budget</span>

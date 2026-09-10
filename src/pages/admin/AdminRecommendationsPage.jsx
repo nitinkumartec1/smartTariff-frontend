@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PackageSearch } from "lucide-react";
-import { collections, getAll } from "@/mockApi/db";
+import { adminApi } from "@/services/adminApi";
 import Card from "@/components/common/Card";
 import Badge from "@/components/common/Badge";
 import EmptyState from "@/components/common/EmptyState";
@@ -16,23 +16,32 @@ export default function AdminRecommendationsPage() {
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
-    const users = getAll(collections.users);
-    const plans = getAll(collections.plans);
-    const recs = getAll(collections.recommendations)
-      .sort((a, b) => new Date(b.generatedAt) - new Date(a.generatedAt))
-      .map((r) => {
-        const top = r.plans.find((p) => p.rank === 1);
-        return {
-          _id: r._id,
-          customerName: users.find((u) => u._id === r.customerId)?.name || "Unknown",
-          generatedAt: r.generatedAt,
-          topPlan: plans.find((p) => p._id === top?.planId)?.name || "N/A",
-          topScore: top?.score || 0,
-          planCount: r.plans.length,
-        };
-      });
-    setRows(recs);
-    setStatus("succeeded");
+    let isMounted = true;
+    async function loadData() {
+      try {
+        const res = await adminApi.getRecommendations();
+        if (!isMounted) return;
+        const recs = (res.data?.docs || res.data || []).map((r) => {
+          const top = r.plans && r.plans.length ? r.plans.find((p) => p.rank === 1) || r.plans[0] : null;
+          return {
+            _id: r._id || r.id,
+            customerName: r.customerName || r.user?.name || "Customer",
+            generatedAt: r.generatedAt || r.createdAt,
+            topPlan: top?.planName || top?.name || "Recommended Plan",
+            topScore: top?.score || 0,
+            planCount: r.plans?.length || 0,
+          };
+        });
+        setRows(recs);
+        setStatus("succeeded");
+      } catch {
+        if (!isMounted) return;
+        setRows([]);
+        setStatus("succeeded");
+      }
+    }
+    loadData();
+    return () => { isMounted = false; };
   }, []);
 
   const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));

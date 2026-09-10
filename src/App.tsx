@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import { store } from "@/store/store";
-import { initDemoData } from "@/utils/seedInit";
 import { fetchCurrentUser } from "@/store/slices/authSlice";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -36,8 +35,6 @@ import AdminUsagePage from "@/pages/admin/AdminUsagePage";
 import AdminRecommendationsPage from "@/pages/admin/AdminRecommendationsPage";
 import AdminFeedbackPage from "@/pages/admin/AdminFeedbackPage";
 import AdminSettingsPage from "@/pages/admin/AdminSettingsPage";
-
-initDemoData();
 
 function AuthBootstrap({ children }: { children: React.ReactNode }) {
   const dispatch = useDispatch();
@@ -114,24 +111,24 @@ function AppRoutes() {
 export default function App() {
   return (
     <Provider store={store}>
-      <AuthBootstrap>
-        <BrowserRouter>
+      <BrowserRouter>
+        <AuthBootstrap>
+          <AppRoutes />
           <Toaster
             position="top-right"
             toastOptions={{
-              duration: 3000,
+              duration: 3500,
               style: {
                 background: "#081936",
-                color: "#FFFFFF",
-                fontSize: "12px",
-                fontWeight: "600",
+                color: "#ffffff",
                 borderRadius: "12px",
+                fontSize: "13px",
+                fontWeight: 600,
               },
             }}
           />
-          <AppRoutes />
-        </BrowserRouter>
-      </AuthBootstrap>
+        </AuthBootstrap>
+      </BrowserRouter>
     </Provider>
   );
 }

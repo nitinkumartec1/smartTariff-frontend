@@ -58,7 +58,7 @@ export default function PublicNavbar() {
               key={l.to}
               to={l.to}
               onClick={(e) => handleNavClick(l.to, e)}
-              className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors cursor-pointer"
+              className="text-sm font-medium text-slate-600 hover:text-[#081936] transition-colors cursor-pointer"
             >
               {l.label}
             </NavLink>

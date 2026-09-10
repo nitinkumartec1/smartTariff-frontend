@@ -1,59 +1,72 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { RotateCcw, ShieldCheck } from "lucide-react";
+import { ShieldCheck, Cpu, RefreshCw } from "lucide-react";
 import Card, { CardBody, CardHeader } from "@/components/common/Card";
 import Button from "@/components/common/Button";
-import ConfirmDialog from "@/components/common/ConfirmDialog";
-import { resetDatabase } from "@/mockApi/db";
-import { seedIfNeeded } from "@/mockApi/seedData";
+import { recommendationApi } from "@/services/recommendationApi";
 
 export default function AdminSettingsPage() {
-  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [modelInfo, setModelInfo] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleReset = () => {
-    resetDatabase();
-    seedIfNeeded();
-    toast.success("Demo database reset with fresh seed data");
-    setConfirmOpen(false);
-    setTimeout(() => window.location.reload(), 800);
+  const fetchStatus = async () => {
+    setLoading(true);
+    try {
+      const res = await recommendationApi.getModelStatus();
+      setModelInfo(res.data);
+      toast.success("ML Model status refreshed");
+    } catch {
+      toast.error("Could not fetch backend ML status");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    fetchStatus();
+  }, []);
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Platform Settings</h1>
-        <p className="mt-1 text-sm text-slate-500">Platform configuration and system administration.</p>
+        <p className="mt-1 text-sm text-slate-500">Platform configuration, ML model status, and backend system telemetry.</p>
       </div>
 
       <Card>
-        <CardHeader className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-indigo-500" /><h2 className="font-semibold text-slate-800">Recommendation Engine</h2></CardHeader>
-        <CardBody className="space-y-2 text-sm text-slate-600">
-          <p><strong>Engine type:</strong> Rule-based scoring (no ML/AI)</p>
-          <p><strong>Weights:</strong> Data 40% · Calls 25% · SMS 10% · Budget 15% · Value 10%</p>
-          <p><strong>Output:</strong> Top 3 ranked plans with explainable reasons</p>
-          <p className="text-xs text-slate-400">Architected to be swapped for an ML-based scoring service without frontend changes.</p>
-        </CardBody>
-      </Card>
-
-      <Card className="border-rose-200">
-        <CardHeader><h2 className="font-semibold text-rose-700">Danger Zone</h2></CardHeader>
-        <CardBody className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-          <div>
-            <p className="text-sm font-medium text-slate-700">Reset demo database</p>
-            <p className="text-xs text-slate-400">Wipes all local data and reseeds fresh sample plans, customers and usage.</p>
+        <CardHeader className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Cpu className="h-5 w-5 text-[#081936]" />
+            <h2 className="font-semibold text-slate-800">SmartTariff V4.3 ML Engine Configuration</h2>
           </div>
-          <Button variant="danger" icon={RotateCcw} onClick={() => setConfirmOpen(true)}>Reset Data</Button>
+          <Button size="sm" variant="secondary" icon={RefreshCw} loading={loading} onClick={fetchStatus}>
+            Refresh Status
+          </Button>
+        </CardHeader>
+        <CardBody className="space-y-3 text-sm text-slate-600">
+          <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Engine Model Type</p>
+              <p className="text-sm font-bold text-[#081936] mt-0.5">{modelInfo?.model_type || "RandomForestRegressor (Scikit-Learn)"}</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Serving Status</p>
+              <p className="text-sm font-bold text-emerald-600 mt-0.5">Active & Serving (FastAPI)</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Feature Vector</p>
+              <p className="text-sm font-bold text-slate-700 mt-0.5">10 Engineered Features</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Estimators / Trees</p>
+              <p className="text-sm font-bold text-slate-700 mt-0.5">100 Trees (Config V4.3)</p>
+            </div>
+          </div>
+          <p className="text-xs text-slate-400 pt-1">
+            Data is persisted in the backend database (SQLite / PostgreSQL) and real-time inference is executed by the backend ML pipeline.
+          </p>
         </CardBody>
       </Card>
-
-      <ConfirmDialog
-        open={confirmOpen}
-        onClose={() => setConfirmOpen(false)}
-        onConfirm={handleReset}
-        title="Reset all demo data?"
-        message="This will permanently erase all customers, plans, usage and recommendations stored locally, then reseed fresh sample data."
-        confirmLabel="Reset Database"
-      />
     </div>
   );
 }

@@ -119,7 +119,7 @@ export default function PlansPage() {
         </div>
 
         {compareList.length > 0 && (
-          <div className="flex items-center gap-3 rounded-2xl bg-indigo-50 border border-indigo-100/80 px-4 py-2 text-xs font-semibold text-[#4935D4] shadow-sm">
+          <div className="flex items-center gap-3 rounded-2xl bg-slate-100 border border-slate-200 px-4 py-2 text-xs font-semibold text-[#081936] shadow-sm">
             <Scale className="h-4 w-4" />
             <span>{compareList.length} of 3 plans selected</span>
             <Button size="sm" onClick={() => navigate("/compare")}>
@@ -142,7 +142,7 @@ export default function PlansPage() {
           <div className="relative flex-1">
             <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
-              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-xs text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#4935D4] focus:bg-white focus:ring-1 focus:ring-[#4935D4]"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-xs text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#081936] focus:bg-white focus:ring-1 focus:ring-[#081936]"
               placeholder="Search by plan ID (e.g. P01, P16), name, price (e.g. 199, ₹1999), or category..."
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
@@ -175,7 +175,7 @@ export default function PlansPage() {
               onClick={() => handlePriceTierChange(tier.id)}
               className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition cursor-pointer ${
                 priceTier === tier.id
-                  ? "bg-[#4935D4] text-white shadow-sm"
+                  ? "bg-[#081936] text-white shadow-sm"
                   : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
             >
@@ -200,7 +200,7 @@ export default function PlansPage() {
               <select
                 value={filters.category}
                 onChange={(e) => handleFilterChange("category", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#4935D4]"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#081936]"
               >
                 <option value="">All Categories</option>
                 {CATEGORIES.map((c) => (
@@ -214,7 +214,7 @@ export default function PlansPage() {
               <select
                 value={filters.offerType}
                 onChange={(e) => handleFilterChange("offerType", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#4935D4]"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#081936]"
               >
                 {OFFER_TYPES.map((o) => (
                   <option key={o.value} value={o.value}>{o.label}</option>
@@ -227,7 +227,7 @@ export default function PlansPage() {
               <select
                 value={filters.fiveG}
                 onChange={(e) => handleFilterChange("fiveG", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#4935D4]"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#081936]"
               >
                 <option value="">All (4G & 5G)</option>
                 <option value="true">5G Ready Only</option>
@@ -244,7 +244,7 @@ export default function PlansPage() {
                   setPriceTier("custom");
                   handleFilterChange("minPrice", e.target.value);
                 }}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#4935D4]"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#081936]"
               />
             </div>
 
@@ -253,7 +253,7 @@ export default function PlansPage() {
               <select
                 value={filters.sortBy}
                 onChange={(e) => handleFilterChange("sortBy", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#4935D4]"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-[#081936]"
               >
                 <option value="">Default Relevance</option>
                 <option value="price_asc">Price: Low to High</option>

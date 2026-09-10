@@ -87,7 +87,7 @@ export default function AdminPlansPage() {
                   {data.map((p) => (
                     <tr key={p._id} className="border-b border-slate-50 last:border-0 hover:bg-slate-50/50">
                       <td className="p-4 font-medium text-slate-800">
-                        <span className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-xs font-bold text-indigo-600 mr-2">
+                        <span className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-xs font-bold text-[#081936] mr-2">
                           {p.planCode || p.planId || "PLAN"}
                         </span>
                         {p.name}
