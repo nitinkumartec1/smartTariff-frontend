@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 import { customerApi } from "@/services/customerApi";
 import Card, { CardBody, CardHeader } from "@/components/common/Card";
 import Badge from "@/components/common/Badge";
+import Button from "@/components/common/Button";
+import ConfirmDialog from "@/components/common/ConfirmDialog";
 import { PageLoader } from "@/components/common/Loader";
 import ErrorState from "@/components/common/ErrorState";
 import EmptyState from "@/components/common/EmptyState";
@@ -15,6 +18,9 @@ export default function AdminCustomerDetailPage() {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [status, setStatus] = useState("loading");
+  const [showStatusConfirm, setShowStatusConfirm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     customerApi.getDetail(id).then((res) => { setData(res.data); setStatus("succeeded"); }).catch(() => setStatus("failed"));
@@ -25,9 +31,33 @@ export default function AdminCustomerDetailPage() {
 
   const { user, profile, usage, recommendations, feedback, currentPlan } = data;
 
+  const handleToggleStatus = async () => {
+    const newStatus = !user.isActive;
+    await customerApi.setStatus(user._id, newStatus);
+    setData((prev) => ({
+      ...prev,
+      user: { ...prev.user, isActive: newStatus },
+    }));
+    toast.success(`Customer ${newStatus ? "activated" : "deactivated"}`);
+    setShowStatusConfirm(false);
+  };
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    try {
+      await customerApi.deleteCustomer(user._id);
+      toast.success(`Customer ${user.name} deleted successfully`);
+      setShowDeleteConfirm(false);
+      navigate("/admin/customers");
+    } catch (err) {
+      toast.error(err.message || "Failed to delete customer");
+      setDeleting(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
-      <button onClick={() => navigate(-1)} className="flex items-center gap-1 text-sm text-slate-500 hover:text-indigo-600">
+      <button onClick={() => navigate("/admin/customers")} className="flex items-center gap-1 text-sm text-slate-500 hover:text-indigo-600 cursor-pointer">
         <ArrowLeft className="h-4 w-4" /> Back to Customers
       </button>
 
@@ -41,7 +71,25 @@ export default function AdminCustomerDetailPage() {
             <p className="text-sm text-slate-500">{user.email} · {user.phone}</p>
           </div>
         </div>
-        <Badge variant={user.isActive ? "success" : "danger"}>{user.isActive ? "Active" : "Inactive"}</Badge>
+        <div className="flex items-center gap-3">
+          <Badge variant={user.isActive ? "success" : "danger"}>{user.isActive ? "Active" : "Inactive"}</Badge>
+          <Button
+            size="sm"
+            variant={user.isActive ? "secondary" : "success"}
+            onClick={() => setShowStatusConfirm(true)}
+          >
+            {user.isActive ? "Deactivate" : "Activate"}
+          </Button>
+          <Button
+            size="sm"
+            variant="danger"
+            onClick={() => setShowDeleteConfirm(true)}
+            className="flex items-center gap-1"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+            <span>Delete Customer</span>
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -123,6 +171,27 @@ export default function AdminCustomerDetailPage() {
           ) : <EmptyState title="No feedback submitted" />}
         </CardBody>
       </Card>
+
+      <ConfirmDialog
+        open={showStatusConfirm}
+        onClose={() => setShowStatusConfirm(false)}
+        onConfirm={handleToggleStatus}
+        title={user.isActive ? "Deactivate customer?" : "Activate customer?"}
+        message={`This will ${user.isActive ? "deactivate" : "activate"} ${user.name}'s account.`}
+        confirmLabel={user.isActive ? "Deactivate" : "Activate"}
+        variant={user.isActive ? "danger" : "success"}
+      />
+
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        onConfirm={handleDelete}
+        title="Delete Customer Permanently?"
+        message={`Are you sure you want to permanently delete customer ${user.name} (${user.email})? All associated data including profile, usage telemetry, recommendations, and feedback will be wiped.`}
+        confirmLabel="Delete Customer"
+        variant="danger"
+        loading={deleting}
+      />
     </div>
   );
 }

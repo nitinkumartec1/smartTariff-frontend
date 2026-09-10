@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, Users } from "lucide-react";
+import { Search, Users, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { customerApi } from "@/services/customerApi";
 import Card from "@/components/common/Card";
@@ -18,6 +18,7 @@ export default function AdminCustomersPage() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("loading");
   const [confirmTarget, setConfirmTarget] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   const load = (page = 1, s = search) => {
     setStatus("loading");
@@ -39,6 +40,18 @@ export default function AdminCustomersPage() {
     toast.success(`Customer ${newStatus ? "activated" : "deactivated"}`);
     setConfirmTarget(null);
     load(pagination.page);
+  };
+
+  const handleDelete = async () => {
+    if (!deleteTarget) return;
+    try {
+      await customerApi.deleteCustomer(deleteTarget._id);
+      toast.success(`Customer ${deleteTarget.name} deleted successfully`);
+      setDeleteTarget(null);
+      load(pagination.page);
+    } catch (err) {
+      toast.error(err.message || "Failed to delete customer");
+    }
   };
 
   return (
@@ -91,10 +104,14 @@ export default function AdminCustomersPage() {
                         <Badge variant={c.isActive ? "success" : "danger"}>{c.isActive ? "Active" : "Inactive"}</Badge>
                       </td>
                       <td className="p-4">
-                        <div className="flex gap-2">
+                        <div className="flex items-center gap-2">
                           <Link to={`/admin/customers/${c._id}`}><Button size="sm" variant="secondary">View</Button></Link>
-                          <Button size="sm" variant={c.isActive ? "danger" : "success"} onClick={() => setConfirmTarget(c)}>
+                          <Button size="sm" variant={c.isActive ? "secondary" : "success"} onClick={() => setConfirmTarget(c)}>
                             {c.isActive ? "Deactivate" : "Activate"}
+                          </Button>
+                          <Button size="sm" variant="danger" onClick={() => setDeleteTarget(c)} className="flex items-center gap-1">
+                            <Trash2 className="h-3.5 w-3.5" />
+                            <span>Delete</span>
                           </Button>
                         </div>
                       </td>
@@ -116,6 +133,16 @@ export default function AdminCustomersPage() {
         message={`This will ${confirmTarget?.isActive ? "deactivate" : "activate"} ${confirmTarget?.name}'s account.`}
         confirmLabel={confirmTarget?.isActive ? "Deactivate" : "Activate"}
         variant={confirmTarget?.isActive ? "danger" : "success"}
+      />
+
+      <ConfirmDialog
+        open={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        onConfirm={handleDelete}
+        title="Delete Customer Permanently?"
+        message={`Are you sure you want to permanently delete customer ${deleteTarget?.name} (${deleteTarget?.email})? All associated profiles, usage history, recommendations, and feedback will be removed.`}
+        confirmLabel="Delete Customer"
+        variant="danger"
       />
     </div>
   );
