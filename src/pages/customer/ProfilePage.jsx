@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import { Save, User, Shield, Phone, Mail, Package, IndianRupee, Sparkles } from "lucide-react";
+import { Save, User, Shield, Phone, Mail, Package, IndianRupee } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { updateProfile } from "@/store/slices/authSlice";
 import { customerApi } from "@/services/customerApi";

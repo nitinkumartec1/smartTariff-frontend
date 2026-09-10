@@ -53,14 +53,14 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-5 rounded-xl border border-slate-100 bg-[#F7F7FF] p-3.5 text-xs">
-          <p className="font-semibold text-slate-700 mb-2">⚡ Quick One-Click Demo Logins:</p>
+          <p className="font-semibold text-slate-700 mb-2">Quick One-Click Demo Logins:</p>
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => fillDemo("customer")}
               className="flex flex-col items-start rounded-lg border border-indigo-100 bg-white p-2 text-left hover:border-indigo-300 hover:bg-indigo-50/50 transition"
             >
-              <span className="font-semibold text-[#4935D4]">👤 Customer Demo</span>
+              <span className="font-semibold text-[#4935D4]">Customer Demo</span>
               <span className="text-[10px] text-slate-500 truncate w-full">aarav.sharma1@example.com</span>
               <span className="text-[10px] text-slate-400">pass: password123</span>
             </button>
@@ -69,7 +69,7 @@ export default function LoginPage() {
               onClick={() => fillDemo("admin")}
               className="flex flex-col items-start rounded-lg border border-slate-200 bg-white p-2 text-left hover:border-slate-300 hover:bg-slate-50 transition"
             >
-              <span className="font-semibold text-slate-800">🛡️ Admin Demo</span>
+              <span className="font-semibold text-slate-800">Admin Demo</span>
               <span className="text-[10px] text-slate-500 truncate w-full">admin@smarttariff.com</span>
               <span className="text-[10px] text-slate-400">pass: admin123</span>
             </button>

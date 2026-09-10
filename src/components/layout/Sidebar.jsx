@@ -11,7 +11,7 @@ import {
   Users,
   PackageSearch,
   Database,
-  Sparkles,
+  Trophy,
   MessageSquare,
   ShieldCheck,
   HelpCircle,
@@ -33,7 +33,7 @@ export const adminNavItems = [
   { to: "/admin/customers", label: "Customers", icon: Users },
   { to: "/admin/plans", label: "Tariff Plans", icon: PackageSearch },
   { to: "/admin/usage", label: "Usage Records", icon: Database },
-  { to: "/admin/recommendations", label: "Recommendations", icon: Sparkles },
+  { to: "/admin/recommendations", label: "Recommendations", icon: Trophy },
   { to: "/admin/feedback", label: "Feedback", icon: MessageSquare },
   { to: "/admin/settings", label: "Settings", icon: Settings },
 ];

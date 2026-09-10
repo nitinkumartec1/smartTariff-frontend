@@ -9,7 +9,6 @@ import {
   Settings,
   LogOut,
   Menu,
-  Sparkles,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { logout } from "@/store/slices/authSlice";

@@ -1,4 +1,4 @@
-import { Wifi, PhoneCall, Sparkles } from "lucide-react";
+import { Wifi, PhoneCall } from "lucide-react";
 
 export default function DashboardHero() {
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { PackageSearch } from "lucide-react";
 import { collections, getAll } from "@/mockApi/db";
 import Card from "@/components/common/Card";
 import Badge from "@/components/common/Badge";
@@ -47,7 +47,7 @@ export default function AdminRecommendationsPage() {
 
       <Card>
         {status === "loading" && <TableSkeleton rows={6} cols={4} />}
-        {status === "succeeded" && rows.length === 0 && <EmptyState icon={Sparkles} title="No recommendations generated yet" />}
+        {status === "succeeded" && rows.length === 0 && <EmptyState icon={PackageSearch} title="No recommendations generated yet" />}
         {status === "succeeded" && rows.length > 0 && (
           <>
             <div className="overflow-x-auto">

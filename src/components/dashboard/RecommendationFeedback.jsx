@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import { ThumbsUp, ThumbsDown, Star, MessageSquareHeart, CheckCircle2, Send, Edit3, Sparkles } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Star, MessageSquareHeart, CheckCircle2, Send, Edit3 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { feedbackApi } from "@/services/feedbackApi";
 import Button from "@/components/common/Button";
 import toast from "react-hot-toast";
 
 const QUICK_TAGS = [
-  "🎯 Accurate Match",
-  "💰 Great Value",
-  "⚡ 5G Ready",
-  "📶 Need More Data",
-  "💸 Price Too High",
+  "Accurate Match",
+  "Great Value",
+  "5G Ready",
+  "Need More Data",
+  "Price Too High",
 ];
 
 export default function RecommendationFeedback({ recommendationId = "latest", onFeedbackSubmitted }) {

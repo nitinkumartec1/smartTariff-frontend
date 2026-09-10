@@ -27,7 +27,7 @@ export default function RecommendationCard({ item, onCompareToggle, isComparing 
       </div>
 
       <div className="flex-1 px-5 py-4">
-        <p className="text-xs font-medium uppercase text-indigo-500">{plan.operator}</p>
+        {plan.category && <p className="text-xs font-medium uppercase text-indigo-500">{plan.category}</p>}
         <h3 className="mt-0.5 text-lg font-semibold text-slate-900">{plan.name}</h3>
         <p className={`mt-1 text-2xl font-bold ${scoreColor(score)}`}>{formatCurrency(plan.price)}<span className="text-sm font-normal text-slate-400">/month</span></p>
 

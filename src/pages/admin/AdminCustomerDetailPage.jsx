@@ -99,7 +99,7 @@ export default function AdminCustomerDetailPage() {
             {currentPlan ? (
               <>
                 <p className="font-semibold text-slate-800">{currentPlan.name}</p>
-                <p className="text-sm text-slate-500">{currentPlan.operator} · {formatCurrency(currentPlan.price)}/mo</p>
+                <p className="text-sm text-slate-500">{currentPlan.category ? `${currentPlan.category} · ` : ""}{formatCurrency(currentPlan.price)}/month</p>
               </>
             ) : <p className="text-sm text-slate-400">No active plan assigned</p>}
           </CardBody>

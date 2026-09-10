@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Users, PackageCheck, Sparkles, Gauge } from "lucide-react";
+import { Users, PackageCheck, Cpu, Trophy, Gauge } from "lucide-react";
 import { adminApi } from "@/services/adminApi";
-import Card, { CardBody, CardHeader } from "@/components/common/Card";
+import Card, { CardBody } from "@/components/common/Card";
 import { CardSkeleton } from "@/components/common/Loader";
-import { SimpleBarChart, SimplePieChart, SimpleLineChart } from "@/components/charts/UsageChart";
 
 export default function AdminDashboardPage() {
   const [data, setData] = useState(null);
@@ -32,7 +31,7 @@ export default function AdminDashboardPage() {
           <div className="rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 via-purple-50/50 to-white p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
             <div className="flex items-center gap-3.5">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-200">
-                <Sparkles className="h-5 w-5" />
+                <Cpu className="h-5 w-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
@@ -56,31 +55,8 @@ export default function AdminDashboardPage() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard icon={Users} label="Total Customers" value={data.cards.totalCustomers} color="indigo" />
             <StatCard icon={PackageCheck} label="Total Active Plans" value={data.cards.activePlans} color="emerald" />
-            <StatCard icon={Sparkles} label="Total Recommendations" value={data.cards.totalRecommendations} color="purple" />
+            <StatCard icon={Trophy} label="Total Recommendations" value={data.cards.totalRecommendations} color="purple" />
             <StatCard icon={Gauge} label="Avg. Recommendation Score" value={`${data.cards.avgScore}%`} color="amber" />
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <Card>
-              <CardHeader><h2 className="font-semibold text-slate-800">Customers Over Time</h2></CardHeader>
-              <CardBody><SimpleLineChart data={data.customersOverTime} xKey="month" dataKey="customers" color="#6366f1" /></CardBody>
-            </Card>
-            <Card>
-              <CardHeader><h2 className="font-semibold text-slate-800">Most Recommended Plans</h2></CardHeader>
-              <CardBody><SimpleBarChart data={data.mostRecommended} xKey="name" dataKey="count" color="#8b5cf6" /></CardBody>
-            </Card>
-            <Card>
-              <CardHeader><h2 className="font-semibold text-slate-800">Plan Category Distribution</h2></CardHeader>
-              <CardBody><SimplePieChart data={data.usageDistribution} /></CardBody>
-            </Card>
-            <Card>
-              <CardHeader><h2 className="font-semibold text-slate-800">Recommendation Score Distribution</h2></CardHeader>
-              <CardBody><SimpleBarChart data={data.scoreDistribution} xKey="range" dataKey="count" color="#f59e0b" /></CardBody>
-            </Card>
-            <Card className="lg:col-span-2">
-              <CardHeader><h2 className="font-semibold text-slate-800">Feedback Statistics</h2></CardHeader>
-              <CardBody><SimplePieChart data={data.feedbackStats} height={220} /></CardBody>
-            </Card>
           </div>
         </>
       )}

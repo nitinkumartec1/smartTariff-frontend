@@ -1,18 +1,11 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { RotateCcw, ShieldCheck, Radio } from "lucide-react";
+import { RotateCcw, ShieldCheck } from "lucide-react";
 import Card, { CardBody, CardHeader } from "@/components/common/Card";
 import Button from "@/components/common/Button";
 import ConfirmDialog from "@/components/common/ConfirmDialog";
 import { resetDatabase } from "@/mockApi/db";
 import { seedIfNeeded } from "@/mockApi/seedData";
-
-const OPERATORS = [
-  { name: "Airtel", plans: "6+ active plans", color: "bg-red-100 text-red-700" },
-  { name: "Jio", plans: "6+ active plans", color: "bg-blue-100 text-blue-700" },
-  { name: "Vi", plans: "6+ active plans", color: "bg-purple-100 text-purple-700" },
-  { name: "BSNL", plans: "6+ active plans", color: "bg-amber-100 text-amber-700" },
-];
 
 export default function AdminSettingsPage() {
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -29,25 +22,8 @@ export default function AdminSettingsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Platform Settings</h1>
-        <p className="mt-1 text-sm text-slate-500">Operator information and platform administration.</p>
+        <p className="mt-1 text-sm text-slate-500">Platform configuration and system administration.</p>
       </div>
-
-      <Card>
-        <CardHeader className="flex items-center gap-2"><Radio className="h-4 w-4 text-indigo-500" /><h2 className="font-semibold text-slate-800">Operator Information</h2></CardHeader>
-        <CardBody>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {OPERATORS.map((op) => (
-              <div key={op.name} className="rounded-xl border border-slate-200 p-4 text-center">
-                <div className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full font-bold ${op.color}`}>
-                  {op.name.charAt(0)}
-                </div>
-                <p className="font-semibold text-slate-800">{op.name}</p>
-                <p className="text-xs text-slate-400">{op.plans}</p>
-              </div>
-            ))}
-          </div>
-        </CardBody>
-      </Card>
 
       <Card>
         <CardHeader className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-indigo-500" /><h2 className="font-semibold text-slate-800">Recommendation Engine</h2></CardHeader>

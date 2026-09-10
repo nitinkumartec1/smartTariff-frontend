@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { X, ArrowRight, SlidersHorizontal, Sparkles } from "lucide-react";
+import { X, ArrowRight, SlidersHorizontal } from "lucide-react";
 import Button from "@/components/common/Button";
 
 export default function CustomerProfileModal({

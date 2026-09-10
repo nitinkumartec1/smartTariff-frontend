@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { History, ArrowRight, Sparkles } from "lucide-react";
+import { History, ArrowRight } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { recommendationApi } from "@/services/recommendationApi";
 import Badge from "@/components/common/Badge";
@@ -45,7 +45,7 @@ export default function HistoryPage() {
           </p>
         </div>
         <Link to="/dashboard">
-          <Button icon={Sparkles} size="sm">
+          <Button size="sm">
             Generate Fresh Plan
           </Button>
         </Link>

@@ -13,7 +13,6 @@ import {
   ArrowLeft,
   Trash2,
   Plus,
-  Sparkles,
 } from "lucide-react";
 import { planApi } from "@/services/planApi";
 import { clearCompare, toggleCompare } from "@/store/slices/planSlice";

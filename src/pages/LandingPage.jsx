@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import {
-  ArrowRight, BarChart3, Sparkles, Scale, ShieldCheck, Gauge, Wallet,
+  ArrowRight, BarChart3, Trophy, Scale, ShieldCheck, Gauge, Wallet,
   ClipboardList, Cpu, ThumbsUp, ChevronDown, Wifi,
 } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 const STEPS = [
   { icon: ClipboardList, title: "Share your usage", desc: "Tell us your data, calling and SMS usage — or let us track it automatically once you're a customer." },
   { icon: Cpu, title: "We analyze it", desc: "Our rule-based scoring engine compares your usage and budget against every active tariff plan." },
-  { icon: Sparkles, title: "Get top 3 plans", desc: "Receive personalized, ranked recommendations with clear reasons for every suggestion." },
+  { icon: Trophy, title: "Get top 3 plans", desc: "Receive personalized, ranked recommendations with clear reasons for every suggestion." },
   { icon: ThumbsUp, title: "Choose & give feedback", desc: "Compare, pick the best plan for you, and tell us if the recommendation was helpful." },
 ];
 
@@ -64,7 +64,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 text-sm font-semibold text-emerald-800 shadow-sm border border-emerald-200">
-              <Sparkles className="h-4 w-4 text-emerald-600 animate-pulse" /> Random Forest ML Model V4.3 Active
+              <Cpu className="h-4 w-4 text-emerald-600" /> Random Forest ML Model V4.3 Active
             </span>
             <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               Find the Telecom Plan <br className="hidden sm:block" />
