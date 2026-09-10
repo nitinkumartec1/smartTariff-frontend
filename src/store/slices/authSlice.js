@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authApi } from "@/services/authApi";
 import { customerApi } from "@/services/customerApi";
+import { getToken } from "@/services/api";
 
 export const login = createAsyncThunk("auth/login", async (payload, { rejectWithValue }) => {
   try {
@@ -22,8 +23,12 @@ export const register = createAsyncThunk("auth/register", async (payload, { reje
 
 export const fetchCurrentUser = createAsyncThunk("auth/me", async (_, { rejectWithValue }) => {
   try {
+    const token = getToken();
+    if (!token) {
+      return null;
+    }
     const res = await authApi.me();
-    return res.data;
+    return res.data?.user || res.data;
   } catch (err) {
     return rejectWithValue(err.message);
   }
@@ -69,8 +74,12 @@ const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => { state.status = "failed"; state.error = action.payload; })
 
       .addCase(fetchCurrentUser.pending, (state) => { state.status = "loading"; })
-      .addCase(fetchCurrentUser.fulfilled, (state, action) => { state.status = "succeeded"; state.user = action.payload; state.bootstrapped = true; })
-      .addCase(fetchCurrentUser.rejected, (state) => { state.status = "failed"; state.user = null; state.bootstrapped = true; })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.status = action.payload ? "succeeded" : "idle";
+        state.user = action.payload?.user || action.payload || null;
+        state.bootstrapped = true;
+      })
+      .addCase(fetchCurrentUser.rejected, (state) => { state.status = "idle"; state.user = null; state.bootstrapped = true; })
 
       .addCase(logout.fulfilled, (state) => { state.user = null; state.status = "idle"; })
 
