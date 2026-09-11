@@ -15,7 +15,8 @@ export default function CustomerProfileModal({
     smsCount: initialValues?.smsCount || 40,
     currentSpending: initialValues?.currentSpending || 1000,
     monthlyBudget: initialValues?.monthlyBudget || 500,
-    preferredDuration: initialValues?.preferredDuration || "30",
+    preferredDuration: initialValues?.preferredDuration || "28",
+    requires5G: initialValues?.requires5G || false,
   });
 
   useEffect(() => {
@@ -26,7 +27,8 @@ export default function CustomerProfileModal({
         smsCount: initialValues.smsCount ?? 40,
         currentSpending: initialValues.currentSpending ?? 1000,
         monthlyBudget: initialValues.monthlyBudget ?? 500,
-        preferredDuration: initialValues.preferredDuration ?? "30",
+        preferredDuration: initialValues.preferredDuration ?? "28",
+        requires5G: initialValues.requires5G ?? false,
       });
     }
   }, [initialValues, isOpen]);
@@ -192,6 +194,25 @@ export default function CustomerProfileModal({
                   </svg>
                 </div>
               </div>
+            </div>
+
+            {/* 7. 5G Requirement Toggle */}
+            <div className="sm:col-span-2 flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50/50 p-3.5">
+              <div>
+                <p className="text-xs font-bold text-[#081936]">5G Network Required</p>
+                <p className="text-[11px] text-slate-500">
+                  Enable only if you strictly mandate plans with 5G connectivity.
+                </p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={Boolean(formData.requires5G)}
+                  onChange={(e) => handleChange("requires5G", e.target.checked)}
+                  className="sr-only peer"
+                />
+                <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#081936]"></div>
+              </label>
             </div>
           </div>
 

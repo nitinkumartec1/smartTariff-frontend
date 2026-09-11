@@ -153,6 +153,7 @@ export default function DashboardPage() {
         minimumCallMinutes: callMinutes,
         minimumSms: smsCount,
         preferredDuration: formData.preferredDuration,
+        requires5G: Boolean(formData.requires5G),
         currentSpending,
       });
 
@@ -164,6 +165,7 @@ export default function DashboardPage() {
         minimumCallMinutes: callMinutes,
         minimumSms: smsCount,
         preferredDuration: formData.preferredDuration,
+        requires5G: Boolean(formData.requires5G),
         currentSpending,
       }));
 
@@ -184,7 +186,7 @@ export default function DashboardPage() {
 
   // Use latest generated recommendations or fallback preview plans
   const displayPlans =
-    latest?.plans?.length >= 3
+    latest?.plans?.length > 0
       ? latest.plans
       : DEFAULT_PREVIEW_PLANS;
 
@@ -223,6 +225,7 @@ export default function DashboardPage() {
               currentSpending: profile?.currentSpending ?? 1000,
               monthlyBudget: profile?.monthlyBudget ?? 500,
               preferredDuration: profile?.preferredDuration ?? "28",
+              requires5G: profile?.requires5G ?? false,
             }}
             onSubmit={async (formData) => {
               await handleFormSubmit(formData);
