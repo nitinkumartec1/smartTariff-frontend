@@ -16,7 +16,13 @@ export default function PreferencesPage() {
 
   useEffect(() => {
     if (user) {
-      customerApi.getProfile(user._id).then((res) => setForm(res.data));
+      customerApi.getProfile(user._id).then((res) => {
+        const data = res.data || {};
+        setForm({
+          ...data,
+          requires5G: Boolean(data.requires5G ?? false),
+        });
+      });
     }
   }, [user]);
 
@@ -31,7 +37,7 @@ export default function PreferencesPage() {
         minimumData: Number(form.minimumData),
         minimumCallMinutes: Number(form.minimumCallMinutes),
         minimumSms: Number(form.minimumSms),
-        requires5G: form.requires5G,
+        requires5G: Boolean(form.requires5G),
       });
       toast.success("Preferences updated. Recommendation engine will prioritize these criteria.");
     } catch (err) {

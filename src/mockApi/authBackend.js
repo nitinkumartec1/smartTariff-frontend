@@ -133,7 +133,7 @@ export function loginUser({ email, password }) {
         minimumData: 20,
         minimumCallMinutes: 500,
         minimumSms: 100,
-        requires5G: true,
+        requires5G: false,
       });
     }
   }

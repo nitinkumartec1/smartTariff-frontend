@@ -120,7 +120,7 @@ function buildCustomers(plans) {
         minimumData: [5, 10, 20, 30, 50][Math.floor(Math.random() * 5)],
         minimumCallMinutes: [300, 500, 1000, 1500][Math.floor(Math.random() * 4)],
         minimumSms: [100, 300, 500][Math.floor(Math.random() * 3)],
-        requires5G: Math.random() > 0.5,
+        requires5G: false,
       },
     });
   }
@@ -236,7 +236,7 @@ export function seedIfNeeded() {
           minimumData: 20,
           minimumCallMinutes: 500,
           minimumSms: 100,
-          requires5G: true,
+          requires5G: false,
         });
       }
       usersUpdated = true;
