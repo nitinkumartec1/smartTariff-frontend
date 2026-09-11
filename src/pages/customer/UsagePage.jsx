@@ -12,6 +12,7 @@ import EmptyState from "@/components/common/EmptyState";
 import { TableSkeleton } from "@/components/common/Loader";
 import { UsageAreaChart } from "@/components/charts/UsageChart";
 import { formatData, formatMinutes, formatCount } from "@/utils/format";
+import { getToken } from "@/services/api";
 
 const RANGES = [
   { value: "3m", label: "Last 3 months", months: 3 },
@@ -39,7 +40,7 @@ export default function UsagePage() {
   });
 
   useEffect(() => {
-    if (user) dispatch(fetchMyUsage(user._id));
+    if (user && getToken()) dispatch(fetchMyUsage(user._id));
   }, [dispatch, user]);
 
   const rangeMonths = RANGES.find((r) => r.value === range)?.months || 6;

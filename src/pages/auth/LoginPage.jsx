@@ -43,10 +43,26 @@ export default function LoginPage() {
         <p className="mt-1 text-center text-sm text-slate-500">Sign in to view your personalized recommendations.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          <Input label="Email address" type="email" placeholder="you@example.com" required
-            value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-          <Input label="Password" type="password" placeholder="••••••••" required
-            value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+          <Input
+            id="login-email"
+            label="Email address"
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="username"
+            required
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
+          <Input
+            id="login-password"
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            autoComplete="current-password"
+            required
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
           <Button type="submit" className="w-full" icon={LogIn} loading={status === "loading"}>
             Sign In
           </Button>

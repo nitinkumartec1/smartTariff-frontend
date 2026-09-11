@@ -5,6 +5,8 @@ import { feedbackApi } from "@/services/feedbackApi";
 import Button from "@/components/common/Button";
 import toast from "react-hot-toast";
 
+import { getToken } from "@/services/api";
+
 const QUICK_TAGS = [
   "Accurate Match",
   "Great Value",
@@ -24,9 +26,9 @@ export default function RecommendationFeedback({ recommendationId = "latest", on
 
   // Check if feedback was already submitted
   useEffect(() => {
-    if (!user) return;
+    if (!user || !getToken()) return;
     feedbackApi
-      .mine(user._id)
+      .mine()
       .then((res) => {
         const found = res.data?.find(
           (f) => f.recommendationId === recommendationId || f.recommendationId === "latest"

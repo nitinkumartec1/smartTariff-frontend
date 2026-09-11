@@ -49,16 +49,54 @@ export default function RegisterPage() {
         <p className="mt-1 text-center text-sm text-slate-500">Get personalized tariff recommendations in minutes.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          <Input label="Full name" placeholder="Priya Sharma" value={form.name} error={errors.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })} />
-          <Input label="Email address" type="email" placeholder="you@example.com" value={form.email} error={errors.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })} />
-          <Input label="Phone number" placeholder="9876543210" value={form.phone} error={errors.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, "").slice(0, 10) })} />
-          <Input label="Password" type="password" placeholder="••••••••" value={form.password} error={errors.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })} />
-          <Input label="Confirm password" type="password" placeholder="••••••••" value={form.confirmPassword} error={errors.confirmPassword}
-            onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })} />
+          <Input
+            id="register-name"
+            label="Full name"
+            placeholder="Priya Sharma"
+            autoComplete="name"
+            value={form.name}
+            error={errors.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+          />
+          <Input
+            id="register-email"
+            label="Email address"
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="email"
+            value={form.email}
+            error={errors.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
+          <Input
+            id="register-phone"
+            label="Phone number"
+            placeholder="9876543210"
+            autoComplete="tel"
+            value={form.phone}
+            error={errors.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, "").slice(0, 10) })}
+          />
+          <Input
+            id="register-password"
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            autoComplete="new-password"
+            value={form.password}
+            error={errors.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
+          <Input
+            id="register-confirm-password"
+            label="Confirm password"
+            type="password"
+            placeholder="••••••••"
+            autoComplete="new-password"
+            value={form.confirmPassword}
+            error={errors.confirmPassword}
+            onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
+          />
           <Button type="submit" className="w-full" icon={UserPlus} loading={status === "loading"}>
             Create Account
           </Button>

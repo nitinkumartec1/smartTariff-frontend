@@ -10,7 +10,7 @@ import {
 } from "@/store/slices/recommendationSlice";
 import { customerApi } from "@/services/customerApi";
 import { usageApi } from "@/services/usageApi";
-import { planApi } from "@/services/planApi";
+import { getToken } from "@/services/api";
 import toast from "react-hot-toast";
 
 import DashboardHero from "@/components/dashboard/DashboardHero";
@@ -111,7 +111,7 @@ export default function DashboardPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !getToken()) return;
     dispatch(fetchMyUsage(user._id));
     dispatch(fetchMyRecommendations(user._id));
     customerApi.getProfile(user._id).then((res) => {
