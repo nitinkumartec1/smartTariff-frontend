@@ -83,7 +83,10 @@ export async function request(endpoint, options = {}) {
 
     if (!response.ok) {
       if (response.status === 401) {
-        setToken(null);
+        const isAuthRoute = endpoint.includes("/auth/login") || endpoint.includes("/auth/register");
+        if (!isAuthRoute) {
+          setToken(null);
+        }
       }
       const errorMsg = data?.detail || data?.message || `Request failed with status ${response.status}`;
       throw new ApiError(errorMsg, response.status, data);
