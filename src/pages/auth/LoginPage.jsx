@@ -30,7 +30,7 @@ export default function LoginPage() {
 
   const fillDemo = (role) => {
     if (role === "admin") setForm({ email: "admin@smarttariff.com", password: "admin123" });
-    if (role === "customer") setForm({ email: "aarav.sharma1@example.com", password: "password123" });
+    if (role === "customer") setForm({ email: "customer@smarttariff.com", password: "password123" });
   };
 
   return (
@@ -61,7 +61,7 @@ export default function LoginPage() {
               className="flex flex-col items-start rounded-lg border border-slate-200 bg-white p-2 text-left hover:border-slate-300 hover:bg-slate-50 transition"
             >
               <span className="font-semibold text-[#081936]">Customer Demo</span>
-              <span className="text-[10px] text-slate-500 truncate w-full">aarav.sharma1@example.com</span>
+              <span className="text-[10px] text-slate-500 truncate w-full">customer@smarttariff.com</span>
               <span className="text-[10px] text-slate-400">pass: password123</span>
             </button>
             <button
